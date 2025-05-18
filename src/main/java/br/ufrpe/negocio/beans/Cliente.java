@@ -59,4 +59,11 @@ public class Cliente {
         this.cnh = cnh;
     }
 
+    public void addAluguel(int id){
+
+    }
+    public void removerAluguel(int id){
+
+    }
+
 }
