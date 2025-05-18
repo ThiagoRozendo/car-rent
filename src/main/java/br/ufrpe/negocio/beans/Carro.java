@@ -9,6 +9,16 @@ public class Carro {
     private int quantidadeDisponivel;
     private boolean status;
 
+    public Carro (String marca, String modelo, int anoFabricacao, String placa, String categoria, int quantidadeDisponivel, boolean status){
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anoFabricacao = anoFabricacao;
+        this.placa = placa;
+        this.categoria = categoria;
+        this.quantidadeDisponivel = quantidadeDisponivel;
+        this.status = status;
+    }
+
     public String getMarca() {
         return marca;
     }
