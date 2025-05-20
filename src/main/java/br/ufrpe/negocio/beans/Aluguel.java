@@ -66,6 +66,7 @@ public class Aluguel {
     public void setAtrasado(boolean atrasado) {
         this.atrasado = atrasado;
     }
+
 }
 
 
