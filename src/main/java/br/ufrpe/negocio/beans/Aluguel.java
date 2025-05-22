@@ -8,10 +8,16 @@ public class Aluguel {
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private String placaCarro;
+    private String cpfCliente; //deve ter o cpf do cliente
+
+
     private boolean ativo;
     private boolean atrasado;
 
-    public Aluguel(String placaCarro, LocalDate dataInicio, LocalDate dataFim) {
+    //ID tem que estar no costrutor também
+    //cpf do cliente também
+    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
+        this.idAluguel = idAluguel;
         this.placaCarro = placaCarro;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -49,6 +55,14 @@ public class Aluguel {
 
     public void setPlacaCarro(String placaCarro) {
         this.placaCarro = placaCarro;
+    }
+
+    public String getCpfCliente() {
+        return cpfCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 
     public boolean isAtivo() {
