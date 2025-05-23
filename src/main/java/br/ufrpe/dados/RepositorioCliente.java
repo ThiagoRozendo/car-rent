@@ -1,20 +1,18 @@
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Cliente;
+import java.util.ArrayList;
 
-import java.time.LocalDate;
-
-public class RepositorioCliente implements IRepositorioCliente{
-    private Cliente[] clientes;
+public class RepositorioCliente implements IRepositorioCliente {
+    private ArrayList<Cliente> clientes;
     private static RepositorioCliente instance;
-    private int proximaPosicao;
 
     public RepositorioCliente() {
-        clientes = new Cliente[10000];
+        clientes = new ArrayList<>();
     }
 
     public static RepositorioCliente getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new RepositorioCliente();
         }
         return instance;
@@ -32,24 +30,20 @@ public class RepositorioCliente implements IRepositorioCliente{
 
     @Override
     public void adicionarCliente(Cliente cliente) {
-        if (cliente != null && proximaPosicao < clientes.length) {
-            clientes[proximaPosicao] = cliente;
-            proximaPosicao++;
+        if (cliente != null) {
+            clientes.add(cliente);
         }
     }
 
     @Override
     public boolean removerPorCpf(String cpf) {
-        for (int i = 0; i < proximaPosicao; i++) {
-            Cliente cliente = clientes[i];
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente = clientes.get(i);
             if (cliente != null && cliente.getCpf().equals(cpf)) {
-                clientes[i] = clientes[proximaPosicao - 1];
-                clientes[proximaPosicao - 1] = null;
-                proximaPosicao--;
+                clientes.remove(i);
                 return true;
             }
         }
         return false;
     }
-
 }
