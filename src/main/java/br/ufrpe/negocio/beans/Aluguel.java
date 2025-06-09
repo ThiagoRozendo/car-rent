@@ -9,7 +9,13 @@ public class Aluguel {
     private LocalDate dataFim;
     private String placaCarro;
     private String cpfCliente; //deve ter o cpf do cliente
+    //atributo itens
 
+    /*/criar classe itens
+    qtd carros alugados
+    carro como atributo
+    valor parcial
+     */
 
     private boolean ativo;
     private boolean atrasado;
