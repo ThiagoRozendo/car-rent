@@ -16,17 +16,17 @@ public class ControladorAlugueis {
 
     public void cadastrarAluguel(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
     // Regras de negocio a serem atribuidas
-        repositorioAluguel.cadastrarAluguel(dataInicio, dataFim, placaCarro, cpfCliente);
+        repositorioAluguel.cadastrar(dataInicio, dataFim, placaCarro, cpfCliente);
     }
 
     public void editarAluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
     // Regras de negocio a serem atribuidas
-        repositorioAluguel.editarAluguel(idAluguel, dataInicio, dataFim, placaCarro, cpfCliente);
+        repositorioAluguel.editar(idAluguel, dataInicio, dataFim, placaCarro, cpfCliente);
     }
 
     public void excluirAluguel(int idAluguel) {
     // Regras de negocio a serem atribuidas
-        repositorioAluguel.excluirAluguel(idAluguel);
+        repositorioAluguel.excluir(idAluguel);
     }
 
     /*/public void finalizarAluguel(int idAluguel) {
@@ -36,11 +36,11 @@ public class ControladorAlugueis {
 
     public Aluguel buscarAluguelPorId(int idAluguel) {
     // Regras de negocio a serem atribuidas
-        return repositorioAluguel.buscarAluguelPorId(idAluguel);
+        return repositorioAluguel.buscarPorId(idAluguel);
     }
 
     public ArrayList<Aluguel> listarAlugueis() {
     // Regras de negocio a serem atribuidas
-        return repositorioAluguel.listarAlugueis();
+        return repositorioAluguel.listar();
     }
 }

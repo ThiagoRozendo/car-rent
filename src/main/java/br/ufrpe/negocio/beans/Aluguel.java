@@ -9,6 +9,7 @@ public class Aluguel {
     private LocalDate dataFim;
     private String placaCarro;
     private String cpfCliente; //deve ter o cpf do cliente
+    private Itens itens;
 
 
     private boolean ativo;
