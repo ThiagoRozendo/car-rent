@@ -1,10 +1,9 @@
+// src/main/java/br/ufrpe/dados/RepositorioCarro.java
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Carro;
 
-import java.util.ArrayList;
-
-public class RepositorioCarro implements IRepositorioCarro{
+public class RepositorioCarro implements IRepositorioCarro {
 
     private Carro[] carros;
     private static RepositorioCarro instance;
@@ -42,17 +41,17 @@ public class RepositorioCarro implements IRepositorioCarro{
     }
 
     @Override
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status) {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
         if (encontrarPosicaoPorPlaca(placa) == -1) {
             redimensionarArray();
-            Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status);
+            Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco);
             carros[contadorCarros] = novoCarro;
             contadorCarros++;
         }
     }
 
     @Override
-    public void editar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status) {
+    public void editar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {
             Carro carroExistente = carros[index];
@@ -61,6 +60,7 @@ public class RepositorioCarro implements IRepositorioCarro{
             carroExistente.setAnoFabricacao(anoFabricacao);
             carroExistente.setCategoria(categoria);
             carroExistente.setStatus(status);
+            carroExistente.setPreco(preco);
         }
     }
 

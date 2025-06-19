@@ -1,3 +1,4 @@
+// src/main/java/br/ufrpe/negocio/beans/Carro.java
 package br.ufrpe.negocio.beans;
 
 public class Carro {
@@ -7,14 +8,16 @@ public class Carro {
     private String placa; //PK
     private String categoria;
     private boolean status;
+    private double preco; // Novo atributo
 
-    public Carro (String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status){
+    public Carro(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
         this.placa = placa;
         this.categoria = categoria;
         this.status = status;
+        this.preco = preco;
     }
 
     public String getMarca() {
@@ -63,5 +66,13 @@ public class Carro {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 }
