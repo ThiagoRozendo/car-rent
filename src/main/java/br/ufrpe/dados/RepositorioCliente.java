@@ -31,13 +31,13 @@ public class RepositorioCliente implements IRepositorioCliente {
         }
     }
 
-    private Cliente buscar(String cpf) {
+    private boolean existe(String cpf) {
         for (int i = 0; i < this.proximaPosicao; i++) {
             if (this.clientes[i] != null && this.clientes[i].getCpf().equals(cpf)) {
-                return this.clientes[i];
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class RepositorioCliente implements IRepositorioCliente {
             return;
         }
 
-        if (this.buscar(cliente.getCpf()) != null) {
+        if (this.existe(cliente.getCpf())) {
             throw new ClienteJaCadastradoException(cliente);
         }
 
@@ -56,10 +56,11 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public Cliente buscarPorCpf(String cpf) throws ClienteNaoEncontradoException {
-        Cliente cliente = this.buscar(cpf);
-        if (cliente != null) {
-            return cliente;
+    public Cliente buscar(String cpf) throws ClienteNaoEncontradoException {
+        for (int i = 0; i < this.proximaPosicao; i++) {
+            if (this.clientes[i] != null && this.clientes[i].getCpf().equals(cpf)) {
+                return this.clientes[i];
+            }
         }
         throw new ClienteNaoEncontradoException(cpf);
     }
@@ -84,5 +85,12 @@ public class RepositorioCliente implements IRepositorioCliente {
         } else {
             throw new ClienteNaoEncontradoException(cpf);
         }
+    }
+
+    @Override
+    public Cliente[] listar() {
+        Cliente[] clientesAtivos = new Cliente[this.proximaPosicao];
+        System.arraycopy(this.clientes, 0, clientesAtivos, 0, this.proximaPosicao);
+        return clientesAtivos;
     }
 }

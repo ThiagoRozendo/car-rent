@@ -8,8 +8,10 @@ public interface IRepositorioCliente {
 
     void adicionarCliente(Cliente cliente) throws ClienteJaCadastradoException;
 
-    Cliente buscarPorCpf(String cpf) throws ClienteNaoEncontradoException;
+    Cliente buscar(String cpf) throws ClienteNaoEncontradoException; // Renomeado
 
     void removerPorCpf(String cpf) throws ClienteNaoEncontradoException;
+
+    Cliente[] listar();
 
 }
