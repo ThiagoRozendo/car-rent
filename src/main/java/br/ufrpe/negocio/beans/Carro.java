@@ -6,16 +6,14 @@ public class Carro {
     private int anoFabricacao;
     private String placa; //PK
     private String categoria;
-    private int quantidadeDisponivel; //apenas quantidade, tratamento de estoque deve ser feito verrifcando se é maior que zero
     private boolean status;
 
-    public Carro (String marca, String modelo, int anoFabricacao, String placa, String categoria, int quantidadeDisponivel, boolean status){
+    public Carro (String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status){
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
         this.placa = placa;
         this.categoria = categoria;
-        this.quantidadeDisponivel = quantidadeDisponivel;
         this.status = status;
     }
 
@@ -57,14 +55,6 @@ public class Carro {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public int getQuantidadeDisponivel() {
-        return quantidadeDisponivel;
-    }
-
-    public void setQuantidadeDisponivel(int quantidadeDisponivel) {
-        this.quantidadeDisponivel = quantidadeDisponivel;
     }
 
     public boolean isStatus() {
