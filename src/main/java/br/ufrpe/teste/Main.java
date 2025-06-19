@@ -31,8 +31,8 @@ public class Main {
         }
 
         ControladorCarros controladorCarros = new ControladorCarros();
-        controladorCarros.cadastrar("Fiat", "Uno", 2020, "12312sdas", "Hatch", true, 150.0);
-        controladorCarros.cadastrar("VW", "Gol", 2019, "asd23d22", "Sedan", true, 180.0);
+        controladorCarros.cadastrar("Fiat", "Uno", 2020, "ABC1234", "Hatch", true, 150.0);
+        controladorCarros.cadastrar("VW", "Gol", 2019, "XYZ5678", "Sedan", true, 180.0);
         for (Carro c : controladorCarros.listarCarros()) {
             System.out.println("Placa: " + c.getPlaca() + ", Modelo: " + c.getModelo() + ", Preço: " + c.getPreco());
         }
@@ -49,7 +49,7 @@ public class Main {
         ControladorAlugueis controladorAlugueis = new ControladorAlugueis();
         try {
             controladorAlugueis.cadastrar(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901", itens);
-            System.out.println("aluguel cadastrado com sucesso");
+            System.out.println("Aluguel cadastrado com sucesso");
         } catch (Exception e) {
             System.out.println("erro ao cadastrar aluguel: " + e.getMessage());
         }
@@ -75,7 +75,7 @@ public class Main {
 
         try {
             controladorAlugueis.excluir(0);
-            System.out.println("Aluguel excluído com sucesso!");
+            System.out.println("Aluguel excluído com sucesso");
         } catch (AluguelNaoEncontradoException e) {
             System.out.println("Erro ao excluir aluguel: " + e.getMessage());
         }
@@ -83,7 +83,7 @@ public class Main {
         try {
             controladorAlugueis.buscarPorId(0);
         } catch (AluguelNaoEncontradoException e) {
-            System.out.println("Erro esperado ao buscar aluguel excluído: " + e.getMessage());
+            System.out.println("Erro esperado: " + e.getMessage());
         }
     }
 }
