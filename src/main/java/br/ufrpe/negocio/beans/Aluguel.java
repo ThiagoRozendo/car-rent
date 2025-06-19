@@ -17,13 +17,23 @@ public class Aluguel {
 
     //ID tem que estar no costrutor também
     //cpf do cliente também
-    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
+    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens) {
         this.idAluguel = idAluguel;
         this.placaCarro = placaCarro;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+        this.cpfCliente = cpfCliente;
+        this.itens = itens;
         this.ativo = true;
         this.atrasado = false;
+    }
+
+    public Itens getItens() {
+        return itens;
+    }
+
+    public void setItens(Itens itens) {
+        this.itens = itens;
     }
 
     public int getIdAluguel() {
