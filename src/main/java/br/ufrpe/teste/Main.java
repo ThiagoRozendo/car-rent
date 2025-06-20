@@ -40,7 +40,7 @@ public class Main {
         Itens itens = new Itens(1, 0, 0.0);
         try {
             Carro carro = controladorCarros.buscarCarroPorPlaca("ABC1234");
-            itens.adicionarCarro(carro);
+            itens.adicionarCarro(carro.getPlaca());
             System.out.println("Itens adicionados: " + itens.getQuantidadeCarros() + ", Valor parcial: " + itens.getValorParcial());
         } catch (Exception e) {
             System.out.println("Erro ao adicionar carro aos itens: " + e.getMessage());

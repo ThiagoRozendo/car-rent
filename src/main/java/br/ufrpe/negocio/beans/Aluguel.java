@@ -8,15 +8,12 @@ public class Aluguel {
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private String placaCarro;
-    private String cpfCliente; //deve ter o cpf do cliente
+    private String cpfCliente;
     private Itens itens;
-
 
     private boolean ativo;
     private boolean atrasado;
 
-    //ID tem que estar no costrutor também
-    //cpf do cliente também
     public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens) {
         this.idAluguel = idAluguel;
         this.placaCarro = placaCarro;
