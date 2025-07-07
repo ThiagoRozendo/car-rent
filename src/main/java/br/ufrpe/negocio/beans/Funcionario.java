@@ -46,35 +46,4 @@ public class Funcionario {
         this.senha = senha;
     }
 
-    public void cadastrarCliente(String nome, String cpf, String endereco, String telefone, String  email, String cnh) {
-
-    }
-    public void editarCliente(String nome, String cpf, String endereco, String telefone, String  email, String cnh){
-
-    }
-
-    public Cliente procurarCliente(String cpf){
-
-    }
-
-    public void cadastrarAluguel(LocalDate dataInicio, LocalDate dataFim, String placaCarro, int idCliente){
-
-    }
-    public void finalizarAluguel(String idAluguel){
-
-    }
-
-    public void editarAluguel(LocalDate dataInicio, LocalDate dataFim, String placaCarro, int idCliente){
-
-    }
-
-    public void cadastrarCarro(String marca, String modelo, String placa, int anoFabricacao, int anoModelo, String categoria, int quantidadeDisponivel){
-
-    }
-
-    public void excluirCarro(String placaCarro){
-
-    }
-
-
 }
