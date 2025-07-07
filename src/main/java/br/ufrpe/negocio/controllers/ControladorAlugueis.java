@@ -15,19 +15,19 @@ public class ControladorAlugueis {
         this.repositorioAluguel = RepositorioAluguel.getInstance();
     }
 
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens)
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
-        validarDados(dataInicio, dataFim, placaCarro, cpfCliente, itens);
-        repositorioAluguel.cadastrar(dataInicio, dataFim, placaCarro, cpfCliente, itens);
+        validarDados(dataInicio, dataFim, placaCarro, cpfCliente);
+        repositorioAluguel.cadastrar(dataInicio, dataFim, placaCarro, cpfCliente);
     }
 
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens)
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
             throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
         if (!aluguelExiste(idAluguel)) {
             throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");
         }
-        validarDados(dataInicio, dataFim, placaCarro, cpfCliente, itens);
-        repositorioAluguel.editar(idAluguel, dataInicio, dataFim, placaCarro, cpfCliente, itens);
+        validarDados(dataInicio, dataFim, placaCarro, cpfCliente);
+        repositorioAluguel.editar(idAluguel, dataInicio, dataFim, placaCarro, cpfCliente);
     }
 
     public void excluir(int idAluguel) throws AluguelNaoEncontradoException {
@@ -50,7 +50,7 @@ public class ControladorAlugueis {
     }
 
     // validacao de todos os dados
-    private void validarDados(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens)
+    private void validarDados(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
 
         if (dataInicio == null || dataFim == null) {
@@ -67,18 +67,6 @@ public class ControladorAlugueis {
 
         if (cpfCliente == null || !cpfCliente.matches("\\d{11}")) {
             throw new CpfNaoEncontradoException("CPF inválido. Deve conter exatamente 11 dígitos.");
-        }
-
-        if (itens == null) {
-            throw new ItensInvalidosException("Itens não podem ser nulos.");
-        }
-
-        if (itens.getQuantidadeCarros() <= 0) {
-            throw new ItensInvalidosException("Deve haver ao menos um carro no aluguel.");
-        }
-
-        if (itens.getValorParcial() <= 0) {
-            throw new ItensInvalidosException("O valor parcial deve ser positivo.");
         }
     }
 
