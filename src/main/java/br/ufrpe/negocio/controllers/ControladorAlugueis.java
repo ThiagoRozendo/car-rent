@@ -16,13 +16,13 @@ public class ControladorAlugueis {
     }
 
     public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
-            throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
+            throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         validarDados(dataInicio, dataFim, placaCarro, cpfCliente);
         repositorioAluguel.cadastrar(dataInicio, dataFim, placaCarro, cpfCliente);
     }
 
     public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
-            throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
+            throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         if (!aluguelExiste(idAluguel)) {
             throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");
         }
@@ -51,7 +51,7 @@ public class ControladorAlugueis {
 
     // validacao de todos os dados
     private void validarDados(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
-            throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException, ItensInvalidosException {
+            throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
 
         if (dataInicio == null || dataFim == null) {
             throw new DataInvalidaException("Datas de início e fim são obrigatórias.");
