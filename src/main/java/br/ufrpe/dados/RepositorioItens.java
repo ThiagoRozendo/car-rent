@@ -1,8 +1,5 @@
 package br.ufrpe.dados;
 
-import br.ufrpe.negocio.beans.Carro;
-import br.ufrpe.negocio.beans.Itens;
-
 public class RepositorioItens implements IRepositorioItens {
 
     private static final int MAX_ITENS = 100;

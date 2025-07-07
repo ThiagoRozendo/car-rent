@@ -1,7 +1,5 @@
 package br.ufrpe.dados;
 
-import br.ufrpe.negocio.beans.Itens;
-
 public interface IRepositorioItens {
 
     void cadastrar(int quantidadeCarros, double valorParcial);

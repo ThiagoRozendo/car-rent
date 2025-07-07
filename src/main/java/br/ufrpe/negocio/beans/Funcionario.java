@@ -1,5 +1,4 @@
 package br.ufrpe.negocio.beans;
-import java.time.LocalDate;
 
 public class Funcionario {
     private String nome;

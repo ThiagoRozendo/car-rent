@@ -9,28 +9,18 @@ public class Aluguel {
     private LocalDate dataFim;
     private String placaCarro;
     private String cpfCliente;
-    private Itens itens;
 
     private boolean ativo;
     private boolean atrasado;
 
-    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens) {
+    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
         this.idAluguel = idAluguel;
         this.placaCarro = placaCarro;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.cpfCliente = cpfCliente;
-        this.itens = itens;
         this.ativo = true;
         this.atrasado = false;
-    }
-
-    public Itens getItens() {
-        return itens;
-    }
-
-    public void setItens(Itens itens) {
-        this.itens = itens;
     }
 
     public int getIdAluguel() {

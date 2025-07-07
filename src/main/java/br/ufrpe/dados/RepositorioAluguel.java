@@ -1,7 +1,6 @@
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Aluguel;
-import br.ufrpe.negocio.beans.Itens;
 
 import java.time.LocalDate;
 
@@ -26,15 +25,15 @@ public class RepositorioAluguel implements IRepositorioAluguel {
     }
 
     @Override
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens){
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente){
         if (contador < MAX_ALUGUEIS) {
-            Aluguel novoAluguel = new Aluguel(nextId++, dataInicio, dataFim, placaCarro, cpfCliente, itens);
+            Aluguel novoAluguel = new Aluguel(nextId++, dataInicio, dataFim, placaCarro, cpfCliente);
             alugueis[contador++] = novoAluguel;
         }
     }
 
     @Override
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente, Itens itens) {
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
         Aluguel aluguel = buscarPorId(idAluguel);
         if (aluguel == null){
             throw new IllegalArgumentException("Aluguel não encontrado.");

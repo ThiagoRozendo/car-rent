@@ -2,8 +2,6 @@ package br.ufrpe.negocio.controllers;
 
 import br.ufrpe.dados.RepositorioAluguel;
 import br.ufrpe.negocio.beans.Aluguel;
-import br.ufrpe.negocio.beans.Carro;
-import br.ufrpe.negocio.beans.Itens;
 import br.ufrpe.negocio.exceptions.*;
 
 import java.time.LocalDate;
