@@ -1,5 +1,6 @@
 package br.ufrpe.dados;
 
+import br.ufrpe.negocio.beans.Categoria;
 import br.ufrpe.negocio.beans.Carro;
 
 public class RepositorioCarro implements IRepositorioCarro {
@@ -40,7 +41,7 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
         if (encontrarPosicaoPorPlaca(placa) == -1) {
             redimensionarArray();
             Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco);
@@ -50,7 +51,7 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void editar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
+    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {
             Carro carroExistente = carros[index];
@@ -79,7 +80,7 @@ public class RepositorioCarro implements IRepositorioCarro {
         if (index != -1) {
             return carros[index];
         }
-        throw new IllegalArgumentException("Carro não encontrado");
+        throw new IllegalArgumentException("Carro com placa " + placa + " não encontrado.");
     }
 
     @Override

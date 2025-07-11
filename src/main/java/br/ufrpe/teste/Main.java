@@ -1,4 +1,4 @@
-package br.ufrpe.teste;
+/*/package br.ufrpe.teste;
 
 import br.ufrpe.negocio.beans.*;
 import br.ufrpe.negocio.controllers.*;
@@ -35,7 +35,7 @@ public class Main {
         controladorCarros.cadastrar("VW", "Gol", 2019, "XYZ5678", "Sedan", true, 180.0);
         for (Carro c : controladorCarros.listarCarros()) {
             System.out.println("Placa: " + c.getPlaca() + ", Modelo: " + c.getModelo() + ", Preço: " + c.getPreco());
-        }
+        };
 
         Itens itens = new Itens(1, 0, 0.0);
         try {
@@ -86,4 +86,4 @@ public class Main {
             System.out.println("Erro esperado: " + e.getMessage());
         }
     }
-}
+}/*/
