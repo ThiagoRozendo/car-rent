@@ -1,6 +1,6 @@
 package br.ufrpe.dados;
 
-import br.ufrpe.negocio.beans.Funcionario;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
 
 import java.util.ArrayList;
 
