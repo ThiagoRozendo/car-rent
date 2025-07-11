@@ -35,7 +35,7 @@ public class GeradorDeRelatorio {
     public static String gerarRelatorio(Map<Categoria, List<Carro>> carrosAgrupados) {
         StringBuilder relatorio = new StringBuilder();
         relatorio.append("=========================================\n");
-        relatorio.append("   Relatório de Carros por Categoria\n");
+        relatorio.append("  Relatório de Carros por Categoria\n");
         relatorio.append("=========================================\n\n");
 
 
