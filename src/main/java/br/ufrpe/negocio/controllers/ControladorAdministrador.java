@@ -11,10 +11,18 @@ import java.util.ArrayList;
 
 public class ControladorAdministrador {
 
-    private IRepositorioAdministrador repositorioAdministrador;
+    private RepositorioAdministrador repositorioAdministrador;
+    private static ControladorAdministrador instance;
 
-    public ControladorAdministrador() {
+    private ControladorAdministrador() {
         this.repositorioAdministrador = RepositorioAdministrador.getInstance();
+    }
+
+    public static ControladorAdministrador getInstance() {
+        if(instance == null) {
+            instance = new ControladorAdministrador();
+        }
+        return instance;
     }
 
     public void cadastrar(String nome, String email, String senha, double salarioMensal)

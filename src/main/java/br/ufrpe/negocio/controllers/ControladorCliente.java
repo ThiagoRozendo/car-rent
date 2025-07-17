@@ -3,7 +3,7 @@ package br.ufrpe.negocio.controllers;
 import br.ufrpe.dados.IRepositorioCliente;
 import br.ufrpe.dados.RepositorioCliente;
 import br.ufrpe.negocio.beans.Cliente;
-import br.ufrpe.negocio.exceptions.CarroInvalidoException;
+import br.ufrpe.negocio.exceptions.ClienteJaCadastradoException;
 import br.ufrpe.negocio.exceptions.CpfNaoEncontradoException;
 
 public class ControladorCliente {
@@ -23,7 +23,7 @@ public class ControladorCliente {
     }
 
     public void cadastrarCliente(Cliente cliente)
-            throws CarroInvalidoException.ClienteJaCadastradoException, IllegalArgumentException {
+            throws ClienteJaCadastradoException, IllegalArgumentException {
 
         if (cliente == null) {
             throw new IllegalArgumentException("O objeto cliente não pode ser nulo.");
@@ -34,6 +34,8 @@ public class ControladorCliente {
 
         this.repositorioCliente.adicionarCliente(cliente);
     }
+
+
 
     public Cliente buscar(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
         return this.repositorioCliente.buscar(cpf);

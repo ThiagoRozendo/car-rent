@@ -9,9 +9,17 @@ import java.util.ArrayList;
 public class ControladorAtendente {
 
     private final RepositorioAtendente repositorioAtendente;
+    private static ControladorAtendente instance;
 
-    public ControladorAtendente() {
+    private ControladorAtendente() {
         this.repositorioAtendente = RepositorioAtendente.getInstance();
+    }
+
+    public static ControladorAtendente getInstance() {
+        if (instance == null) {
+            instance = new ControladorAtendente();
+        }
+        return instance;
     }
 
     public void cadastrar(String nome, String email, String senha, double vendasBrutas, double taxaComissao)

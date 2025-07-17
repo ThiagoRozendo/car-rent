@@ -9,10 +9,18 @@ import java.util.ArrayList;
 
 public class ControladorAlugueis {
 
+    private static ControladorAlugueis instance;
     private final RepositorioAluguel repositorioAluguel;
 
-    public ControladorAlugueis() {
+    private ControladorAlugueis() {
         this.repositorioAluguel = RepositorioAluguel.getInstance();
+    }
+
+    public static ControladorAlugueis getInstance() {
+        if (instance == null) {
+            instance = new ControladorAlugueis();
+        }
+        return instance;
     }
 
     public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)

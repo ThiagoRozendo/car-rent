@@ -9,18 +9,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Fachada {
+
+    private static Fachada instance;
     private final ControladorAdministrador controladorAdministrador;
     private final ControladorAlugueis controladorAlugueis;
     private final ControladorAtendente controladorAtendente;
     private final ControladorCarros controladorCarros;
     private final ControladorCliente controladorCliente;
 
-    public Fachada() {
-        this.controladorAdministrador = new ControladorAdministrador();
-        this.controladorAlugueis = new ControladorAlugueis();
-        this.controladorAtendente = new ControladorAtendente();
-        this.controladorCarros = new ControladorCarros();
+    private Fachada() {
+        this.controladorAdministrador = ControladorAdministrador.getInstance();
+        this.controladorAlugueis = ControladorAlugueis.getInstance();
+        this.controladorAtendente = ControladorAtendente.getInstance();
+        this.controladorCarros = ControladorCarros.getInstance();
         this.controladorCliente = ControladorCliente.getInstance();
+    }
+
+    public static Fachada getInstance() {
+        if(instance == null) {
+            instance = new Fachada();
+        }
+        return instance;
     }
 
     // Administrador
@@ -71,7 +80,7 @@ public class Fachada {
 
     // Cliente
     public void cadastrarCliente(Cliente cliente)
-            throws CarroInvalidoException.ClienteJaCadastradoException, IllegalArgumentException {
+            throws ClienteJaCadastradoException, IllegalArgumentException {
         controladorCliente.cadastrarCliente(cliente);
     }
 
