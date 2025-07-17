@@ -11,6 +11,8 @@ public abstract class Funcionario {
         this.senha = senha;
     }
 
+    public abstract double calcularSalario();
+
     public String getNome() {
         return nome;
     }
