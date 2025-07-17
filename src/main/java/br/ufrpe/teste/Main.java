@@ -1,4 +1,4 @@
-package br.ufrpe.teste;
+/*/package br.ufrpe.teste;
 
 import br.ufrpe.negocio.beans.*;
 import br.ufrpe.negocio.controllers.*;
@@ -86,4 +86,4 @@ public class Main {
             System.out.println("Erro esperado: " + e.getMessage());
         }
     }
-}
+}/*/
