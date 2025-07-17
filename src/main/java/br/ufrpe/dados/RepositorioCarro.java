@@ -1,6 +1,9 @@
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Carro;
+import br.ufrpe.negocio.beans.Historico;
+
+import java.util.List;
 
 public class RepositorioCarro implements IRepositorioCarro {
 
@@ -87,5 +90,25 @@ public class RepositorioCarro implements IRepositorioCarro {
         Carro[] todos = new Carro[contadorCarros];
         System.arraycopy(carros, 0, todos, 0, contadorCarros);
         return todos;
+    }
+
+    public void adicionarHistorico(String placa, Historico historico) {
+        Carro carro = buscarCarroPorPlaca(placa);
+        if (carro != null) {
+            carro.adicionarHistorico(historico);
+        }
+        else {
+            throw new IllegalArgumentException("Carro com placa " + placa + "não encontrado");
+        }
+    }
+
+    public List<Historico> listarHistorico(String placa) {
+        Carro carro = buscarCarroPorPlaca(placa);
+        if (carro != null) {
+            return carro.getHistoricos();
+        }
+        else {
+            throw new IllegalArgumentException("Carro com placa" + placa + "não encontrado");
+        }
     }
 }

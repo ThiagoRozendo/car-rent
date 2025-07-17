@@ -1,6 +1,9 @@
 // src/main/java/br/ufrpe/negocio/beans/Carro.java
 package br.ufrpe.negocio.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Carro {
     private String marca;
     private String modelo;
@@ -9,6 +12,7 @@ public class Carro {
     private String categoria;
     private boolean status;
     private double preco; // Novo atributo
+    private List<Historico> historicos;
 
     public Carro(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
         this.marca = marca;
@@ -18,6 +22,7 @@ public class Carro {
         this.categoria = categoria;
         this.status = status;
         this.preco = preco;
+        this.historicos = new ArrayList<>();
     }
 
     public String getMarca() {
@@ -74,5 +79,13 @@ public class Carro {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public List<Historico> getHistoricos() {
+        return historicos;
+    }
+
+    public void adicionarHistorico(Historico historico) {
+        this.historicos.add(historico);
     }
 }
