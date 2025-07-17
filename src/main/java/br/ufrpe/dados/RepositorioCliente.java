@@ -2,6 +2,7 @@ package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Cliente;
 import br.ufrpe.negocio.exceptions.CarroInvalidoException;
+import br.ufrpe.negocio.exceptions.ClienteJaCadastradoException;
 import br.ufrpe.negocio.exceptions.CpfNaoEncontradoException;
 
 public class RepositorioCliente implements IRepositorioCliente {
@@ -41,13 +42,13 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public void adicionarCliente(Cliente cliente) throws CarroInvalidoException.ClienteJaCadastradoException {
+    public void adicionarCliente(Cliente cliente) throws ClienteJaCadastradoException {
         if (cliente == null || cliente.getCpf() == null) {
             return;
         }
 
         if (this.existe(cliente.getCpf())) {
-            throw new CarroInvalidoException.ClienteJaCadastradoException(cliente);
+            throw new ClienteJaCadastradoException("Cliente já cadastrado.");
         }
 
         this.verificarCapacidade();
