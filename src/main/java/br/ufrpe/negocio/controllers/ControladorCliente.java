@@ -3,6 +3,7 @@ package br.ufrpe.negocio.controllers;
 import br.ufrpe.dados.IRepositorioCliente;
 import br.ufrpe.dados.RepositorioCliente;
 import br.ufrpe.negocio.beans.Cliente;
+import br.ufrpe.negocio.excecoes.ClienteNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.ClienteJaCadastradoException;
 import br.ufrpe.negocio.exceptions.CpfNaoEncontradoException;
 
@@ -37,11 +38,11 @@ public class ControladorCliente {
 
 
 
-    public Cliente buscar(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public Cliente buscar(String cpf) throws ClienteNaoEncontradoException {
         return this.repositorioCliente.buscar(cpf);
     }
 
-    public void removerCliente(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public void removerCliente(String cpf) throws ClienteNaoEncontradoException {
         this.repositorioCliente.removerPorCpf(cpf);
     }
 

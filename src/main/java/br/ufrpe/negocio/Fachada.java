@@ -3,6 +3,7 @@ package br.ufrpe.negocio;
 import br.ufrpe.negocio.beans.*;
 import br.ufrpe.negocio.beans.Funionarios.*;
 import br.ufrpe.negocio.controllers.*;
+import br.ufrpe.negocio.excecoes.ClienteNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.*;
 
 import java.time.LocalDate;
@@ -85,11 +86,11 @@ public class Fachada {
         controladorCliente.cadastrarCliente(cliente);
     }
 
-    public Cliente buscarClientePorCpf(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public Cliente buscarClientePorCpf(String cpf) throws ClienteNaoEncontradoException {
         return controladorCliente.buscar(cpf);
     }
 
-    public void removerCliente(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public void removerCliente(String cpf) throws ClienteNaoEncontradoException {
         controladorCliente.removerCliente(cpf);
     }
 
