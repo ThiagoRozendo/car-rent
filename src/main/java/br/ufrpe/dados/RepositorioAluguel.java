@@ -1,11 +1,18 @@
 package br.ufrpe.dados;
 
+import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.beans.Aluguel;
+import br.ufrpe.negocio.beans.Carro;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
+import br.ufrpe.negocio.controllers.ControladorCarros;
+import br.ufrpe.negocio.exceptions.AluguelNaoEncontradoException;
+import br.ufrpe.negocio.exceptions.CarroInvalidoException;
 
 import java.time.LocalDate;
 
 public class RepositorioAluguel implements IRepositorioAluguel {
 
+    private ControladorCarros controladorCarros = ControladorCarros.getInstance();
     private static final int MAX_ALUGUEIS = 100;
     private Aluguel[] alugueis;
     private int contador;
@@ -25,12 +32,24 @@ public class RepositorioAluguel implements IRepositorioAluguel {
     }
 
     @Override
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente){
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
         if (contador < MAX_ALUGUEIS) {
+            Carro carro = controladorCarros.buscarCarroPorPlaca(placaCarro);
+
+            if (carro == null) {
+                throw new CarroInvalidoException("Carro com placa " + placaCarro + " não encontrado.");
+            }
+
+            if (!   carro.isStatus()) {
+                throw new CarroInvalidoException("Carro com placa " + placaCarro + " já está alugado.");
+            }
+
+            carro.setStatus(false);
             Aluguel novoAluguel = new Aluguel(nextId++, dataInicio, dataFim, placaCarro, cpfCliente);
             alugueis[contador++] = novoAluguel;
         }
     }
+
 
     @Override
     public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
@@ -78,5 +97,22 @@ public class RepositorioAluguel implements IRepositorioAluguel {
             lista.add(alugueis[i]);
         }
         return lista;
+    }
+
+    @Override
+    public void finalizarAluguel(int idAluguel, Object funcionario) {
+        if (funcionario instanceof Funcionario) {
+            Aluguel aluguel = buscarPorId(idAluguel);
+            if (aluguel == null) {
+                throw new AluguelNaoEncontradoException("Aluguel não encontrado.");
+            }
+            aluguel.setAtivo(false);
+            Carro carro = controladorCarros.buscarCarroPorPlaca(aluguel.getPlacaCarro());
+            if (carro != null) {
+                carro.setStatus(true); // Marca o carro como disponível novamente
+            }
+        } else {
+            throw new IllegalArgumentException("Apenas funcionários podem finalizar o aluguel.");
+        }
     }
 }

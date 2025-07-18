@@ -9,10 +9,18 @@ import java.util.ArrayList;
 
 public class ControladorAlugueis {
 
+    private static ControladorAlugueis instance;
     private final RepositorioAluguel repositorioAluguel;
 
-    public ControladorAlugueis() {
+    private ControladorAlugueis() {
         this.repositorioAluguel = RepositorioAluguel.getInstance();
+    }
+
+    public static ControladorAlugueis getInstance() {
+        if (instance == null) {
+            instance = new ControladorAlugueis();
+        }
+        return instance;
     }
 
     public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
@@ -47,6 +55,13 @@ public class ControladorAlugueis {
 
     public ArrayList<Aluguel> listar() {
         return repositorioAluguel.listar();
+    }
+
+    public void finalizarAluguel(int idAluguel, Object funcionario) throws AluguelNaoEncontradoException, IllegalArgumentException {
+        if (!aluguelExiste(idAluguel)) {
+            throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");
+        }
+        repositorioAluguel.finalizarAluguel(idAluguel, funcionario);
     }
 
     // validacao de todos os dados
