@@ -3,7 +3,9 @@ package br.ufrpe.dados;
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.beans.Aluguel;
 import br.ufrpe.negocio.beans.Carro;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
 import br.ufrpe.negocio.controllers.ControladorCarros;
+import br.ufrpe.negocio.exceptions.AluguelNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.CarroInvalidoException;
 
 import java.time.LocalDate;
@@ -38,7 +40,7 @@ public class RepositorioAluguel implements IRepositorioAluguel {
                 throw new CarroInvalidoException("Carro com placa " + placaCarro + " não encontrado.");
             }
 
-            if (!carro.isStatus()) {
+            if (!   carro.isStatus()) {
                 throw new CarroInvalidoException("Carro com placa " + placaCarro + " já está alugado.");
             }
 
@@ -95,5 +97,22 @@ public class RepositorioAluguel implements IRepositorioAluguel {
             lista.add(alugueis[i]);
         }
         return lista;
+    }
+
+    @Override
+    public void finalizarAluguel(int idAluguel, Object funcionario) {
+        if (funcionario instanceof Funcionario) {
+            Aluguel aluguel = buscarPorId(idAluguel);
+            if (aluguel == null) {
+                throw new AluguelNaoEncontradoException("Aluguel não encontrado.");
+            }
+            aluguel.setAtivo(false);
+            Carro carro = controladorCarros.buscarCarroPorPlaca(aluguel.getPlacaCarro());
+            if (carro != null) {
+                carro.setStatus(true); // Marca o carro como disponível novamente
+            }
+        } else {
+            throw new IllegalArgumentException("Apenas funcionários podem finalizar o aluguel.");
+        }
     }
 }

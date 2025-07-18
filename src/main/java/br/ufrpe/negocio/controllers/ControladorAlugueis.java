@@ -57,6 +57,13 @@ public class ControladorAlugueis {
         return repositorioAluguel.listar();
     }
 
+    public void finalizarAluguel(int idAluguel, Object funcionario) throws AluguelNaoEncontradoException, IllegalArgumentException {
+        if (!aluguelExiste(idAluguel)) {
+            throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");
+        }
+        repositorioAluguel.finalizarAluguel(idAluguel, funcionario);
+    }
+
     // validacao de todos os dados
     private void validarDados(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
