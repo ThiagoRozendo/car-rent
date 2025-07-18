@@ -4,6 +4,9 @@ package br.ufrpe.negocio.controllers;
 import br.ufrpe.dados.RepositorioCarro;
 import br.ufrpe.dados.funcionarios.RepositorioAtendente;
 import br.ufrpe.negocio.beans.Carro;
+import br.ufrpe.negocio.beans.RegistroCarros;
+
+import java.util.List;
 
 public class ControladorCarros {
 
@@ -21,16 +24,16 @@ public class ControladorCarros {
         return instance;
     }
 
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco){
-        repositorioCarro.cadastrar(marca, modelo, anoFabricacao, placa, categoria, status, preco);
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco, String descricao) {
+        repositorioCarro.cadastrar(marca, modelo, anoFabricacao, placa, categoria, status, preco, descricao);
     }
 
     public void editar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco){
         repositorioCarro.editar(marca, modelo, anoFabricacao, placa, categoria, status, preco);
     }
 
-    public void excluir(String placa){
-        repositorioCarro.excluir(placa);
+    public void excluir(String placa, String descricao) {
+        repositorioCarro.excluir(placa, descricao);
     }
 
     public Carro buscarCarroPorPlaca(String placa){
@@ -39,5 +42,9 @@ public class ControladorCarros {
 
     public Carro[] listarCarros(){
         return repositorioCarro.listarCarros();
+    }
+
+    public List<RegistroCarros> listarRegistros() {
+        return repositorioCarro.listarRegistros();
     }
 }

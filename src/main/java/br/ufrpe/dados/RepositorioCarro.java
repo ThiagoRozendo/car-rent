@@ -2,7 +2,11 @@ package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Carro;
 import br.ufrpe.negocio.beans.Historico;
+import br.ufrpe.negocio.beans.RegistroCarros;
+import br.ufrpe.negocio.beans.TipoOperacao;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioCarro implements IRepositorioCarro {
@@ -11,6 +15,8 @@ public class RepositorioCarro implements IRepositorioCarro {
     private static RepositorioCarro instance;
     private static final int TAMANHO_INICIAL = 10;
     private int contadorCarros;
+    private final List<RegistroCarros> registros = new ArrayList<>();
+
 
     public RepositorioCarro() {
         this.carros = new Carro[TAMANHO_INICIAL];
@@ -43,12 +49,14 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco, String descricao) {
         if (encontrarPosicaoPorPlaca(placa) == -1) {
             redimensionarArray();
             Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco);
             carros[contadorCarros] = novoCarro;
             contadorCarros++;
+
+            registros.add(new RegistroCarros(novoCarro, descricao, LocalDateTime.now(), TipoOperacao.ADICAO));
         }
     }
 
@@ -67,12 +75,17 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void excluir(String placa) {
+    public void excluir(String placa, String descricao) {
+        Carro carroRemovido = buscarCarroPorPlaca(placa);
+        registros.add(new RegistroCarros(carroRemovido, descricao, LocalDateTime.now(), TipoOperacao.REMOCAO));
+
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {
             carros[index] = carros[contadorCarros - 1];
             carros[contadorCarros - 1] = null;
             contadorCarros--;
+
+
         }
     }
 
@@ -110,5 +123,9 @@ public class RepositorioCarro implements IRepositorioCarro {
         else {
             throw new IllegalArgumentException("Carro com placa" + placa + "não encontrado");
         }
+    }
+
+    public List<RegistroCarros> listarRegistros() {
+        return new ArrayList<>(registros);
     }
 }

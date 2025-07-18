@@ -7,6 +7,7 @@ import br.ufrpe.negocio.exceptions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Fachada {
 
@@ -119,17 +120,21 @@ public class Fachada {
         return controladorAlugueis.listar();
     }
 
+    public void finalizarAluguel(int idAluguel, Object funcionario) throws AluguelNaoEncontradoException, IllegalArgumentException {
+        controladorAlugueis.finalizarAluguel(idAluguel, funcionario);
+    }
+
     // Carro
-    public void cadastrarCarro(String marca, String modelo, int ano, String placa, String categoria, boolean status, double preco) {
-        controladorCarros.cadastrar(marca, modelo, ano, placa, categoria, status, preco);
+    public void cadastrarCarro(String marca, String modelo, int ano, String placa, String categoria, boolean status, double preco, String descricao) {
+        controladorCarros.cadastrar(marca, modelo, ano, placa, categoria, status, preco, descricao);
     }
 
     public void editarCarro(String marca, String modelo, int ano, String placa, String categoria, boolean status, double preco) {
         controladorCarros.editar(marca, modelo, ano, placa, categoria, status, preco);
     }
 
-    public void excluirCarro(String placa) {
-        controladorCarros.excluir(placa);
+    public void excluirCarro(String placa, String descricao) {
+        controladorCarros.excluir(placa, descricao);
     }
 
     public Carro buscarCarroPorPlaca(String placa) {
@@ -138,5 +143,9 @@ public class Fachada {
 
     public Carro[] listarCarros() {
         return controladorCarros.listarCarros();
+    }
+
+    public List<RegistroCarros> listarRegistros(){
+        return controladorCarros.listarRegistros();
     }
 }
