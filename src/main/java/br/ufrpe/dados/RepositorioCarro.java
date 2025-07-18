@@ -1,9 +1,6 @@
 package br.ufrpe.dados;
 
-import br.ufrpe.negocio.beans.Carro;
-import br.ufrpe.negocio.beans.Historico;
-import br.ufrpe.negocio.beans.RegistroCarros;
-import br.ufrpe.negocio.beans.TipoOperacao;
+import br.ufrpe.negocio.beans.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,7 +46,7 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco, String descricao) {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         if (encontrarPosicaoPorPlaca(placa) == -1) {
             redimensionarArray();
             Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco);
@@ -61,7 +58,7 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void editar(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
+    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {
             Carro carroExistente = carros[index];

@@ -126,11 +126,11 @@ public class Fachada {
     }
 
     // Carro
-    public void cadastrarCarro(String marca, String modelo, int ano, String placa, String categoria, boolean status, double preco, String descricao) {
+    public void cadastrarCarro(String marca, String modelo, int ano, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         controladorCarros.cadastrar(marca, modelo, ano, placa, categoria, status, preco, descricao);
     }
 
-    public void editarCarro(String marca, String modelo, int ano, String placa, String categoria, boolean status, double preco) {
+    public void editarCarro(String marca, String modelo, int ano, String placa, Categoria categoria, boolean status, double preco) {
         controladorCarros.editar(marca, modelo, ano, placa, categoria, status, preco);
     }
 
