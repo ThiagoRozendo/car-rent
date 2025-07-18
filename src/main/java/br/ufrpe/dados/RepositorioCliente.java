@@ -1,8 +1,8 @@
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Cliente;
-import br.ufrpe.negocio.exceptions.CarroInvalidoException;
-import br.ufrpe.negocio.exceptions.CpfNaoEncontradoException;
+import br.ufrpe.negocio.excecoes.ClienteJaCadastradoException;
+import br.ufrpe.negocio.excecoes.ClienteNaoEncontradoException;
 
 public class RepositorioCliente implements IRepositorioCliente {
 
@@ -41,13 +41,13 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public void adicionarCliente(Cliente cliente) throws CarroInvalidoException.ClienteJaCadastradoException {
+    public void adicionarCliente(Cliente cliente) throws ClienteJaCadastradoException {
         if (cliente == null || cliente.getCpf() == null) {
             return;
         }
 
         if (this.existe(cliente.getCpf())) {
-            throw new CarroInvalidoException.ClienteJaCadastradoException(cliente);
+            throw new ClienteJaCadastradoException(cliente);
         }
 
         this.verificarCapacidade();
@@ -56,17 +56,17 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public Cliente buscar(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public Cliente buscar(String cpf) throws ClienteNaoEncontradoException {
         for (int i = 0; i < this.proximaPosicao; i++) {
             if (this.clientes[i] != null && this.clientes[i].getCpf().equals(cpf)) {
                 return this.clientes[i];
             }
         }
-        throw new CpfNaoEncontradoException.ClienteNaoEncontradoException(cpf);
+        throw new ClienteNaoEncontradoException(cpf);
     }
 
     @Override
-    public void removerPorCpf(String cpf) throws CpfNaoEncontradoException.ClienteNaoEncontradoException {
+    public void removerPorCpf(String cpf) throws ClienteNaoEncontradoException {
         int indiceRemover = -1;
 
         for (int i = 0; i < this.proximaPosicao; i++) {
@@ -83,7 +83,7 @@ public class RepositorioCliente implements IRepositorioCliente {
             this.proximaPosicao--;
             this.clientes[this.proximaPosicao] = null;
         } else {
-            throw new CpfNaoEncontradoException.ClienteNaoEncontradoException(cpf);
+            throw new ClienteNaoEncontradoException(cpf);
         }
     }
 
