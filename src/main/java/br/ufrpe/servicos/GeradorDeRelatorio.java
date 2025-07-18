@@ -14,7 +14,7 @@ public class GeradorDeRelatorio {
     public static void main(String[] args) {
 
         List<Carro> frota = Arrays.asList(
-                new Carro("Fiat ", "Mobi", 2023, "PDV-1234", Categoria.ECONOMICO, true, 68000.00),
+                new Carro("Fiat", "Mobi", 2023, "PDV-1234", Categoria.ECONOMICO, true, 68000.00),
                 new Carro("Hyundai", "HB20", 2024, "PGE-5678", Categoria.ECONOMICO, true, 85000.50),
                 new Carro("Toyota", "Corolla", 2023, "KGS-1122", Categoria.INTERMEDIARIO, false, 150000.00),
                 new Carro("Jeep", "Compass", 2024, "QWE-9876", Categoria.SUV, true, 230000.00),
