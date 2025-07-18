@@ -1,19 +1,16 @@
 // src/main/java/br/ufrpe/negocio/beans/Carro.java
 package br.ufrpe.negocio.beans;
 
-import java.util.Locale;
-
 public class Carro {
     private String marca;
     private String modelo;
     private int anoFabricacao;
     private String placa; //PK
-    private Categoria categoria; // Corrigido para usar o enum Categoria
+    private String categoria;
     private boolean status;
-    private double preco;
+    private double preco; // Novo atributo
 
-    // Construtor corrigido para receber o enum Categoria
-    public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
+    public Carro(String marca, String modelo, int anoFabricacao, String placa, String categoria, boolean status, double preco) {
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
@@ -22,18 +19,6 @@ public class Carro {
         this.status = status;
         this.preco = preco;
     }
-
-    // Método toString() para formatação automática no relatório
-    @Override
-    public String toString() {
-        // Usando Locale.forLanguageTag("pt-BR") para formatar o preço como moeda brasileira
-        return String.format(Locale.forLanguageTag("pt-BR"),
-                "  - %s %s (%d) | Placa: %s | Preço: R$ %.2f",
-                this.marca, this.modelo, this.anoFabricacao, this.placa, this.preco);
-    }
-
-    // --- Getters e Setters ---
-    // (Apenas o get/set de Categoria precisa de atenção)
 
     public String getMarca() {
         return marca;
@@ -67,11 +52,11 @@ public class Carro {
         this.placa = placa;
     }
 
-    public Categoria getCategoria() { // Mantido o método que retorna o enum
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) { // Corrigido para receber o enum
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
