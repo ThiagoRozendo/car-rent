@@ -34,8 +34,8 @@ public class Main {
         }
 
         // Cadastro de carros
-        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", "Hatch", true, 150.0, "Adicao de carro fiat uno");
-        fachada.cadastrarCarro("VW", "Gol", 2019, "XYZ5678", "Sedan", true, 180.0, "Adicao de carro vw gol");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
+        fachada.cadastrarCarro("VW", "Gol", 2019, "XYZ5678", Categoria.ECONOMICO, true, 180.0, "Adicao de carro vw gol");
 
         // Listar carros
         for (Carro c : fachada.listarCarros()) {

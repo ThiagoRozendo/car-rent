@@ -1,6 +1,7 @@
 // src/main/java/br/ufrpe/negocio/beans/Carro.java
 package br.ufrpe.negocio.beans;
 
+import java.util.List;
 import java.util.Locale;
 
 public class Carro {
@@ -11,6 +12,8 @@ public class Carro {
     private Categoria categoria; // Corrigido para usar o enum Categoria
     private boolean status;
     private double preco;
+    private List<Historico> historicos;
+
 
     // Construtor corrigido para receber o enum Categoria
     public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
@@ -71,6 +74,14 @@ public class Carro {
         return categoria;
     }
 
+    public List<Historico> getHistoricos() {
+        return historicos;
+    }
+
+    public void setHistoricos(List<Historico> historicos) {
+        this.historicos = historicos;
+    }
+
     public void setCategoria(Categoria categoria) { // Corrigido para receber o enum
         this.categoria = categoria;
     }
@@ -89,5 +100,9 @@ public class Carro {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public void adicionarHistorico(Historico historico) {
+        this.historicos.add(historico);
     }
 }
