@@ -2,6 +2,7 @@ package br.ufrpe.negocio.controllers;
 
 import br.ufrpe.dados.RepositorioAluguel;
 import br.ufrpe.negocio.beans.Aluguel;
+import br.ufrpe.negocio.beans.Carro;
 import br.ufrpe.negocio.exceptions.*;
 
 import java.time.LocalDate;
@@ -23,19 +24,19 @@ public class ControladorAlugueis {
         return instance;
     }
 
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
-        validarDados(dataInicio, dataFim, placaCarro, cpfCliente);
-        repositorioAluguel.cadastrar(dataInicio, dataFim, placaCarro, cpfCliente);
+        validarDados(dataInicio, dataFim, cpfCliente);
+        repositorioAluguel.cadastrar(dataInicio, dataFim, carrinho, cpfCliente);
     }
 
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente)
             throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         if (!aluguelExiste(idAluguel)) {
             throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");
         }
-        validarDados(dataInicio, dataFim, placaCarro, cpfCliente);
-        repositorioAluguel.editar(idAluguel, dataInicio, dataFim, placaCarro, cpfCliente);
+        validarDados(dataInicio, dataFim, cpfCliente);
+        repositorioAluguel.editar(idAluguel, dataInicio, dataFim, carrinho, cpfCliente);
     }
 
     public void excluir(int idAluguel) throws AluguelNaoEncontradoException {
@@ -65,7 +66,7 @@ public class ControladorAlugueis {
     }
 
     // validacao de todos os dados
-    private void validarDados(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente)
+    private void validarDados(LocalDate dataInicio, LocalDate dataFim, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
 
         if (dataInicio == null || dataFim == null) {
@@ -74,10 +75,6 @@ public class ControladorAlugueis {
 
         if (!dataFim.isAfter(dataInicio)) {
             throw new DataInvalidaException("A data de fim deve ser posterior à data de início.");
-        }
-
-        if (placaCarro == null || placaCarro.trim().isEmpty()) {
-            throw new CarroInvalidoException("A placa do carro não pode ser vazia.");
         }
 
         if (cpfCliente == null || !cpfCliente.matches("\\d{11}")) {

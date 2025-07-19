@@ -9,6 +9,7 @@ import br.ufrpe.negocio.exceptions.AluguelNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.CarroInvalidoException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RepositorioAluguel implements IRepositorioAluguel {
 
@@ -32,27 +33,20 @@ public class RepositorioAluguel implements IRepositorioAluguel {
     }
 
     @Override
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente) {
         if (contador < MAX_ALUGUEIS) {
-            Carro carro = controladorCarros.buscarCarroPorPlaca(placaCarro);
 
-            if (carro == null) {
-                throw new CarroInvalidoException("Carro com placa " + placaCarro + " não encontrado.");
+            for(Carro carro : carrinho) {
+                carro.setStatus(false);
             }
-
-            if (!   carro.isStatus()) {
-                throw new CarroInvalidoException("Carro com placa " + placaCarro + " já está alugado.");
-            }
-
-            carro.setStatus(false);
-            Aluguel novoAluguel = new Aluguel(nextId++, dataInicio, dataFim, placaCarro, cpfCliente);
+            Aluguel novoAluguel = new Aluguel(nextId++, dataInicio, dataFim, carrinho, cpfCliente);
             alugueis[contador++] = novoAluguel;
         }
     }
 
 
     @Override
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, String placaCarro, String cpfCliente) {
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente) {
         Aluguel aluguel = buscarPorId(idAluguel);
         if (aluguel == null){
             throw new IllegalArgumentException("Aluguel não encontrado.");
@@ -60,7 +54,7 @@ public class RepositorioAluguel implements IRepositorioAluguel {
         else {
             aluguel.setDataInicio(dataInicio);
             aluguel.setDataFim(dataFim);
-            aluguel.setPlacaCarro(placaCarro);
+            aluguel.setCarrinho(carrinho);
             aluguel.setCpfCliente(cpfCliente);
         }
     }

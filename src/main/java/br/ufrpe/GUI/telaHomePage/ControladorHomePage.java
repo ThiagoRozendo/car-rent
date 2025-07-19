@@ -5,13 +5,18 @@ import br.ufrpe.negocio.beans.Carro;
 import br.ufrpe.negocio.beans.Categoria;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import br.ufrpe.GUI.telaDetalhesCarros.ControladorDetalhesCarro;
 
 import java.util.ArrayList;
 
@@ -37,6 +42,11 @@ public class ControladorHomePage {
     }
 
     private void carregarCarros() {
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asd", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asasdd", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
+        fachada.cadastrarCarro("VW", "Pupunha", 2020, "d32d23d", Categoria.ECONOMICO, true, 300000.0, "Adicao de carro fiat uno");
+
         Carro[] carros = fachada.listarCarros();
         for (Carro carro : carros) {
             VBox card = criarCardCarro(carro);
@@ -67,6 +77,22 @@ public class ControladorHomePage {
         // evento de clique
         box.setOnMouseClicked(event -> {
             System.out.println("Carro clicado: " + carro.getModelo());
+            try {
+                Stage stage = (Stage) txtBusca.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaDetalhesCarro.fxml"));
+                Parent root = loader.load();
+
+                ControladorDetalhesCarro controlador = loader.getController();
+                controlador.setCarro(carro);
+
+
+                Scene novaCena = new Scene(root);
+                stage.setScene(novaCena);
+                stage.show();
+
+            } catch (Exception e) {
+                System.out.println("Erro ao carregar tela: " + e.getMessage());
+            }
         });
 
         // efeito de hover

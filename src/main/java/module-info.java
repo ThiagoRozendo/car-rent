@@ -6,6 +6,7 @@ module car.rent {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires java.base;
 
     opens br.ufrpe.GUI to javafx.fxml;
     exports br.ufrpe.GUI;
@@ -15,4 +16,7 @@ module car.rent {
     opens br.ufrpe.GUI.telaCadastro to javafx.fxml;
     exports br.ufrpe.GUI.telaHomePage;
     opens br.ufrpe.GUI.telaHomePage to javafx.fxml;
+    opens br.ufrpe.GUI.telaDetalhesCarros;
+    exports br.ufrpe.GUI.telaDetalhesCarros to javafx.graphics;
+
 }

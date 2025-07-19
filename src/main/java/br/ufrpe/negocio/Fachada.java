@@ -99,9 +99,9 @@ public class Fachada {
     }
 
     // Aluguel
-    public void cadastrarAluguel(LocalDate inicio, LocalDate fim, String placa, String cpf)
+    public void cadastrarAluguel(LocalDate inicio, LocalDate fim, ArrayList<Carro> carrinho, String cpf)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
-        controladorAlugueis.cadastrar(inicio, fim, placa, cpf);
+        controladorAlugueis.cadastrar(inicio, fim, carrinho, cpf);
     }
 
     public void editarAluguel(int id, LocalDate inicio, LocalDate fim, String placa, String cpf)
