@@ -1,11 +1,18 @@
 package br.ufrpe.dados.funcionarios;
 import br.ufrpe.negocio.beans.Funionarios.Administrador;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
+import br.ufrpe.negocio.controllers.ControladorAdministrador;
+import br.ufrpe.negocio.exceptions.AdministradorNaoEncontradoException;
+import br.ufrpe.negocio.exceptions.AtendenteNaoEncontradoException;
+import br.ufrpe.negocio.exceptions.DadosInvalidosException;
+
 import java.util.ArrayList;
 
 public class RepositorioAdministrador implements IRepositorioAdministrador{
 
-    private ArrayList<Administrador> administradores;
     private static RepositorioAdministrador instance;
+    private ArrayList<Administrador> administradores;
+
 
     private RepositorioAdministrador() {
         this.administradores = new ArrayList<>();

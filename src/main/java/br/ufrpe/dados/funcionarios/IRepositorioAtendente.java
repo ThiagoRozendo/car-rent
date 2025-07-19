@@ -1,6 +1,8 @@
 package br.ufrpe.dados.funcionarios;
 
 import br.ufrpe.negocio.beans.Funionarios.Atendente;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
+import br.ufrpe.negocio.exceptions.DadosInvalidosException;
 
 import java.util.ArrayList;
 

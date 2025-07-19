@@ -1,12 +1,20 @@
 package br.ufrpe.dados.funcionarios;
 
+import br.ufrpe.negocio.Fachada;
+import br.ufrpe.negocio.beans.Funionarios.Administrador;
 import br.ufrpe.negocio.beans.Funionarios.Atendente;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
+import br.ufrpe.negocio.controllers.ControladorAdministrador;
+import br.ufrpe.negocio.controllers.ControladorCarros;
+import br.ufrpe.negocio.exceptions.AtendenteNaoEncontradoException;
+import br.ufrpe.negocio.exceptions.DadosInvalidosException;
 
 import java.util.ArrayList;
 
 public class RepositorioAtendente implements IRepositorioAtendente {
 
-    private ArrayList<Atendente> atendentes;
+    private ControladorAdministrador controladorAdministrador = ControladorAdministrador.getInstance();
+    private ArrayList<Atendente> atendentes = new ArrayList<>();
     private static RepositorioAtendente instance;
 
     public static RepositorioAtendente getInstance(){
@@ -52,3 +60,4 @@ public class RepositorioAtendente implements IRepositorioAtendente {
     }
 
 }
+

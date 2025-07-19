@@ -3,6 +3,8 @@ package br.ufrpe.negocio.controllers;
 import br.ufrpe.dados.funcionarios.IRepositorioAdministrador;
 import br.ufrpe.dados.funcionarios.RepositorioAdministrador;
 import br.ufrpe.negocio.beans.Funionarios.Administrador;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
+import br.ufrpe.negocio.exceptions.AtendenteNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.EmailInvalidoException;
 import br.ufrpe.negocio.exceptions.AdministradorNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.DadosInvalidosException;

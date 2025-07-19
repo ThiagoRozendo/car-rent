@@ -149,4 +149,25 @@ public class Fachada {
     public List<RegistroCarros> listarRegistros(){
         return controladorCarros.listarRegistros();
     }
+
+    // Login
+    public Funcionario fazerLogin(String email, String senha) throws AdministradorNaoEncontradoException, DadosInvalidosException {
+        if(email.equals("admin@admin.com") && senha.equals("12345678")){
+            controladorAdministrador.cadastrar("Administrador", "admin@admin.com", "12345678", 3450.00);
+            return controladorAdministrador.buscarPorEmail("admin@admin.com");
+        }
+
+        for (Funcionario administrador : controladorAdministrador.listar()) {
+            if (administrador.getEmail().equals(email) && administrador.getSenha().equals(senha)) {
+                return administrador;
+            }
+        }
+
+        for (Funcionario atendente : controladorAtendente.listar()) {
+            if (atendente.getEmail().equals(email) && atendente.getSenha().equals(senha)) {
+                return atendente;
+            }
+        }
+        throw new AdministradorNaoEncontradoException("Login inválido. Verifique seu email e senha.");
+    }
 }

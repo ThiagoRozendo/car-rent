@@ -37,4 +37,5 @@ public abstract class Funcionario {
         this.senha = senha;
     }
 
+
 }

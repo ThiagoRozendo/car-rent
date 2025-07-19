@@ -2,6 +2,7 @@ package br.ufrpe.negocio.controllers;
 
 import br.ufrpe.dados.funcionarios.RepositorioAtendente;
 import br.ufrpe.negocio.beans.Funionarios.Atendente;
+import br.ufrpe.negocio.beans.Funionarios.Funcionario;
 import br.ufrpe.negocio.exceptions.*;
 
 import java.util.ArrayList;
