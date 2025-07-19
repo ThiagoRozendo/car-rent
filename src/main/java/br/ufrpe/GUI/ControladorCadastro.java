@@ -1,8 +1,12 @@
 package br.ufrpe.GUI;
 
 import br.ufrpe.negocio.Fachada;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -10,6 +14,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import static javafx.scene.paint.Color.GREEN;
 
@@ -102,6 +108,20 @@ public class ControladorCadastro {
                 aviso.setVisible(true);
                 aviso.setText("Administrador cadastrado com sucesso!");
 
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                pause.setOnFinished(evento -> {
+                    try {
+                        Stage stage = (Stage) txtNome.getScene().getWindow();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaLogin2.fxml"));
+                        Parent root = loader.load();
+                        Scene novaCena = new Scene(root);
+                        stage.setScene(novaCena);
+                        stage.show();
+                    } catch (Exception e) {
+                        aviso1.setText("Erro ao carregar tela: " + e.getMessage());
+                    }
+                });
+                pause.play();
             } catch (NumberFormatException e) {
                 aviso.setVisible(true);
                 aviso.setText("Salário inválido. Apenas números são permitidos.");
@@ -119,6 +139,21 @@ public class ControladorCadastro {
                 aviso1.setTextFill(GREEN);
                 aviso1.setVisible(true);
                 aviso1.setText("Atendente cadastrado com sucesso!");
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                pause.setOnFinished(evento -> {
+                    try {
+                        Stage stage = (Stage) txtNome.getScene().getWindow();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaLogin2.fxml"));
+                        Parent root = loader.load();
+                        Scene novaCena = new Scene(root);
+                        stage.setScene(novaCena);
+                        stage.show();
+                    } catch (Exception e) {
+                        aviso1.setText("Erro ao carregar tela: " + e.getMessage());
+                    }
+                });
+                pause.play();
 
             } catch (NumberFormatException e) {
                 aviso1.setVisible(true);
