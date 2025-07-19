@@ -125,4 +125,34 @@ public class RepositorioCarro implements IRepositorioCarro {
     public List<RegistroCarros> listarRegistros() {
         return new ArrayList<>(registros);
     }
+
+    public List<Carro> filtrarPorStatus(boolean status) {
+        List<Carro> carrosFiltrados = new ArrayList<>();
+        for (int i = 0; i < contadorCarros; i++) {
+            if (carros[i] != null && carros[i].isStatus() == status) {
+                carrosFiltrados.add(carros[i]);
+            }
+        }
+        return carrosFiltrados;
+    }
+
+    public List<Carro> filtrarPorCategoria(Categoria categoria) {
+        List<Carro> carrosFiltrados = new ArrayList<>();
+        for (int i = 0; i < contadorCarros; i++) {
+            if (carros[i] != null && carros[i].getCategoria().equals(categoria)) {
+                carrosFiltrados.add(carros[i]);
+            }
+        }
+        return carrosFiltrados;
+    }
+
+    public List<Carro> filtrarPorPlaca(String placa) {
+        List<Carro> carrosFiltrados = new ArrayList<>();
+        int i = encontrarPosicaoPorPlaca(placa);
+        if (i != -1) {
+            carrosFiltrados.add(carros[i]);
+        }
+        return carrosFiltrados;
+    }
+
 }
