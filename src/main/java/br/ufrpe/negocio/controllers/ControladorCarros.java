@@ -25,16 +25,16 @@ public class ControladorCarros {
         return instance;
     }
 
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
-        repositorioCarro.cadastrar(marca, modelo, anoFabricacao, placa, categoria, status, preco, descricao);
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao, String descricaoCadastro) {
+        repositorioCarro.cadastrar(marca, modelo, anoFabricacao, placa, categoria, status, preco, descricao, descricaoCadastro);
     }
 
-    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco){
-        repositorioCarro.editar(marca, modelo, anoFabricacao, placa, categoria, status, preco);
+    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
+        repositorioCarro.editar(marca, modelo, anoFabricacao, placa, categoria, status, preco, descricao);
     }
 
-    public void excluir(String placa, String descricao) {
-        repositorioCarro.excluir(placa, descricao);
+    public void excluir(String placa, String descricaoExclusao) {
+        repositorioCarro.excluir(placa, descricaoExclusao);
     }
 
     public Carro buscarCarroPorPlaca(String placa){

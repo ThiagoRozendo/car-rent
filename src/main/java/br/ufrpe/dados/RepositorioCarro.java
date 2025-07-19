@@ -46,19 +46,19 @@ public class RepositorioCarro implements IRepositorioCarro {
     }
 
     @Override
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao, String descricaoCadastro) {
         if (encontrarPosicaoPorPlaca(placa) == -1) {
             redimensionarArray();
-            Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco);
+            Carro novoCarro = new Carro(marca, modelo, anoFabricacao, placa, categoria, status, preco, descricao);
             carros[contadorCarros] = novoCarro;
             contadorCarros++;
 
-            registros.add(new RegistroCarros(novoCarro, descricao, LocalDateTime.now(), TipoOperacao.ADICAO));
+            registros.add(new RegistroCarros(novoCarro, descricaoCadastro, LocalDateTime.now(), TipoOperacao.ADICAO));
         }
     }
 
     @Override
-    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
+    public void editar(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {
             Carro carroExistente = carros[index];
@@ -68,13 +68,14 @@ public class RepositorioCarro implements IRepositorioCarro {
             carroExistente.setCategoria(categoria);
             carroExistente.setStatus(status);
             carroExistente.setPreco(preco);
+            carroExistente.setDescricao(descricao);
         }
     }
 
     @Override
-    public void excluir(String placa, String descricao) {
+    public void excluir(String placa, String descricaoExclusao) {
         Carro carroRemovido = buscarCarroPorPlaca(placa);
-        registros.add(new RegistroCarros(carroRemovido, descricao, LocalDateTime.now(), TipoOperacao.REMOCAO));
+        registros.add(new RegistroCarros(carroRemovido, descricaoExclusao, LocalDateTime.now(), TipoOperacao.REMOCAO));
 
         int index = encontrarPosicaoPorPlaca(placa);
         if (index != -1) {

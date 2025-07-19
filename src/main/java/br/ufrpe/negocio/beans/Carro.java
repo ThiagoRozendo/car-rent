@@ -13,10 +13,11 @@ public class Carro {
     private boolean status;
     private double preco;
     private List<Historico> historicos;
+    private String descricao;
 
 
     // Construtor corrigido para receber o enum Categoria
-    public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco) {
+    public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
@@ -24,6 +25,7 @@ public class Carro {
         this.categoria = categoria;
         this.status = status;
         this.preco = preco;
+        this.descricao = descricao;
     }
 
     // Método toString() para formatação automática no relatório
@@ -104,5 +106,13 @@ public class Carro {
 
     public void adicionarHistorico(Historico historico) {
         this.historicos.add(historico);
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
