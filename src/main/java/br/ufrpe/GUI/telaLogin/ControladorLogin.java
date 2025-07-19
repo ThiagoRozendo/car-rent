@@ -1,7 +1,6 @@
-package br.ufrpe.GUI;
+package br.ufrpe.GUI.telaLogin;
 
 import br.ufrpe.negocio.Fachada;
-import br.ufrpe.negocio.beans.Funionarios.Atendente;
 import br.ufrpe.negocio.exceptions.DadosInvalidosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

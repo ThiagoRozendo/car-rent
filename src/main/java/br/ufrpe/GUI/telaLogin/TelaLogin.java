@@ -1,4 +1,4 @@
-package br.ufrpe.GUI;
+package br.ufrpe.GUI.telaLogin;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

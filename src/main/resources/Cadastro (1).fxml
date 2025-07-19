@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F0F2F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.GUI.ControladorCadastro">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F0F2F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.GUI.telaCadastro.ControladorCadastro">
    <children>
       <VBox fx:id="vboxAtendente" alignment="CENTER" layoutX="415.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" visible="false">
          <effect>

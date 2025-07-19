@@ -1,4 +1,4 @@
-package br.ufrpe.GUI;
+package br.ufrpe.GUI.telaCadastro;
 
 import br.ufrpe.negocio.Fachada;
 import javafx.animation.PauseTransition;
