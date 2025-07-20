@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public interface IRepositorioAluguel {
 
-    void cadastrar(LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente);
-    void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente);
+    void cadastrar(LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente);
+    void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente);
     void excluir(int idAluguel);
     void finalizarAluguel(int idAluguel, Object funcionario);
     Aluguel buscarPorId(int idAluguel);

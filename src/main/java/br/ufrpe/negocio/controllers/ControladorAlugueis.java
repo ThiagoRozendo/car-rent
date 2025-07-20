@@ -24,13 +24,13 @@ public class ControladorAlugueis {
         return instance;
     }
 
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente)
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         validarDados(dataInicio, dataFim, cpfCliente);
         repositorioAluguel.cadastrar(dataInicio, dataFim, carrinho, cpfCliente);
     }
 
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente)
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente)
             throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         if (!aluguelExiste(idAluguel)) {
             throw new AluguelNaoEncontradoException("Aluguel com ID " + idAluguel + " não encontrado.");

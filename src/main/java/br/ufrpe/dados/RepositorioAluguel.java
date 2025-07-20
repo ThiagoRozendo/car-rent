@@ -33,7 +33,7 @@ public class RepositorioAluguel implements IRepositorioAluguel {
     }
 
     @Override
-    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente) {
+    public void cadastrar(LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente) {
         if (contador < MAX_ALUGUEIS) {
 
             for(Carro carro : carrinho) {
@@ -46,7 +46,7 @@ public class RepositorioAluguel implements IRepositorioAluguel {
 
 
     @Override
-    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente) {
+    public void editar(int idAluguel, LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente) {
         Aluguel aluguel = buscarPorId(idAluguel);
         if (aluguel == null){
             throw new IllegalArgumentException("Aluguel não encontrado.");

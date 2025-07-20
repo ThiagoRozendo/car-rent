@@ -43,58 +43,67 @@ public class Main {
         }
 
         // aluguel
-        try {
-            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
+
+        try{
+            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), fachada.listarCarros(), "12345678901");
             System.out.println("Aluguel cadastrado com sucesso");
+        System.out.println(fachada.listarAlugueis().getLast().getValorParcial());
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
         }
 
-        try {
-            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "XYZ5678", "12345678901");
-            System.out.println("Aluguel cadastrado com sucesso");
-        } catch (Exception e) {
-            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
-        }
-
-        try {
-            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
-        } catch (Exception e) {
-            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
-        } // erro esperado
-
-        try {
-            fachada.finalizarAluguel(0, cliente);
-        } catch (Exception e) {
-            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
-        } // erro esperado
-
-        Administrador admin = new Administrador("Admin", "jonas@gmail.com", "admin123", 5000.0);
-
-         try {
-            fachada.finalizarAluguel(0, admin);
-             System.out.println("Aluguel finalizado com sucesso");
-        } catch (Exception e) {
-            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
-        }
-
-
-        // Listar aluguéis
-        System.out.println("Lista de alugueis:");
-        for (Aluguel a : fachada.listarAlugueis()) {
-            System.out.println("ID: " + a.getIdAluguel() + ", Cliente: " + a.getCpfCliente() + ", Placa: " + a.getPlacaCarro());
-        }
+//        try {
+//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
+//            System.out.println("Aluguel cadastrado com sucesso");
+//        } catch (Exception e) {
+//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
+//        }
 //
-        try {
-            fachada.excluirCarro("ABC1234", "quebrou mano");
-        } catch (Exception e) {
-            System.out.println("Erro ao excluir carro: " + e.getMessage());
-        }
-         // Listar registros de carros
-        System.out.println("Lista de registros:");
-        for (RegistroCarros a : fachada.listarRegistros()) {
-            System.out.println("Carro: " + a.getCarro().getMarca() + " " + a.getCarro().getModelo() + ", Descriçao: " + a.getDescricao() + ", Tipo de operaçao: " + a.getTipo() + ", Data e hora: " + a.getHorarioRegistro());
-        }
+//        try {
+//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "XYZ5678", "12345678901");
+//            System.out.println("Aluguel cadastrado com sucesso");
+//        } catch (Exception e) {
+//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
+//        }
+//
+//        try {
+//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
+//        } catch (Exception e) {
+//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
+//        } // erro esperado
+//
+//        try {
+//            fachada.finalizarAluguel(0, cliente);
+//        } catch (Exception e) {
+//            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
+//        } // erro esperado
+//
+//        Administrador admin = new Administrador("Admin", "jonas@gmail.com", "admin123", 5000.0);
+//
+//         try {
+//            fachada.finalizarAluguel(0, admin);
+//             System.out.println("Aluguel finalizado com sucesso");
+//        } catch (Exception e) {
+//            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
+//        }
+//
+//
+//        // Listar aluguéis
+//        System.out.println("Lista de alugueis:");
+//        for (Aluguel a : fachada.listarAlugueis()) {
+//            System.out.println("ID: " + a.getIdAluguel() + ", Cliente: " + a.getCpfCliente() + ", Placa: " + a.getPlacaCarro());
+//        }
+////
+//        try {
+//            fachada.excluirCarro("ABC1234", "quebrou mano");
+//        } catch (Exception e) {
+//            System.out.println("Erro ao excluir carro: " + e.getMessage());
+//        }
+//         // Listar registros de carros
+//        System.out.println("Lista de registros:");
+//        for (RegistroCarros a : fachada.listarRegistros()) {
+//            System.out.println("Carro: " + a.getCarro().getMarca() + " " + a.getCarro().getModelo() + ", Descriçao: " + a.getDescricao() + ", Tipo de operaçao: " + a.getTipo() + ", Data e hora: " + a.getHorarioRegistro());
+//        }
 
 //        // Editar aluguel
 //        try {

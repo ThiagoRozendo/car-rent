@@ -18,6 +18,10 @@ public class Fachada {
     private final ControladorAtendente controladorAtendente;
     private final ControladorCarros controladorCarros;
     private final ControladorCliente controladorCliente;
+    private List<Carro> carrinho = new ArrayList<>();
+
+
+
 
     private Fachada() {
         this.controladorAdministrador = ControladorAdministrador.getInstance();
@@ -99,14 +103,14 @@ public class Fachada {
     }
 
     // Aluguel
-    public void cadastrarAluguel(LocalDate inicio, LocalDate fim, ArrayList<Carro> carrinho, String cpf)
+    public void cadastrarAluguel(LocalDate inicio, LocalDate fim, Carro[] carrinho, String cpf)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         controladorAlugueis.cadastrar(inicio, fim, carrinho, cpf);
     }
 
-    public void editarAluguel(int id, LocalDate inicio, LocalDate fim, String placa, String cpf)
+    public void editarAluguel(int id, LocalDate inicio, LocalDate fim, Carro[] carrinho, String cpf)
             throws AluguelNaoEncontradoException, DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
-        controladorAlugueis.editar(id, inicio, fim, placa, cpf);
+        controladorAlugueis.editar(id, inicio, fim, carrinho, cpf);
     }
 
     public void excluirAluguel(int id) throws AluguelNaoEncontradoException {
@@ -169,5 +173,28 @@ public class Fachada {
             }
         }
         throw new AdministradorNaoEncontradoException("Login inválido. Verifique seu email e senha.");
+    }
+
+    public void adicionarAoCarrinho(Carro carro) {
+        if (carrinho.size() >= 2) {
+            throw new IllegalStateException("Carrinho cheio!");
+        }
+        carrinho.add(carro);
+    }
+
+    public void removerDoCarrinho(Carro carro) {
+        if(carrinho.size() == 0){
+            throw new IllegalStateException("Carrinho vazio!");
+        }
+        carrinho.remove(carro);
+    }
+
+
+    public List<Carro> getCarrinho() {
+        return carrinho;
+    }
+
+    public void limparCarrinho() {
+        carrinho.clear();
     }
 }

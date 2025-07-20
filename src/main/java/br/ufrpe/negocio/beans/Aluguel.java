@@ -13,17 +13,22 @@ public class Aluguel {
 
     private boolean ativo;
     private boolean atrasado;
-    private ArrayList<Carro> carrinho;
+    private Carro[] carrinho;
     private double valorParcial;
 
-    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, ArrayList<Carro> carrinho, String cpfCliente) {
+    public Aluguel(int idAluguel, LocalDate dataInicio, LocalDate dataFim, Carro[] carrinho, String cpfCliente) {
         this.idAluguel = idAluguel;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.cpfCliente = cpfCliente;
         this.ativo = true;
         this.atrasado = false;
-        this.carrinho = new ArrayList<>();
+        if (carrinho.length == 2) {
+            this.carrinho = carrinho;
+        } else {
+            throw new IllegalArgumentException("O carrinho deve conter exatamente 2 carros.");
+        }
+
         this.valorParcial = getValorParcial();
     }
 
@@ -35,16 +40,30 @@ public class Aluguel {
         this.idAluguel = idAluguel;
     }
 
-    public void setCarrinho(ArrayList<Carro> carrinho) {
-        this.carrinho = carrinho;
+    public Carro[] getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(Carro[] carrinho) {
+        if (carrinho.length == 2) {
+            this.carrinho = carrinho;
+            this.valorParcial = getValorParcial();
+        } else {
+            throw new IllegalArgumentException("O carrinho deve conter exatamente 2 carros.");
+        }
     }
 
     public double getValorParcial() {
-        for(Carro carro : carrinho) {
-            valorParcial += carro.getPreco();
+        double total = 0;
+        for (Carro carro : carrinho) {
+            if (carro != null) {
+                total += carro.getPreco();
+            }
         }
-        return valorParcial;
+        return total;
     }
+
+
 
     public void setValorParcial(double valorParcial) {
         this.valorParcial = valorParcial;
@@ -99,19 +118,7 @@ public class Aluguel {
     }
 
     // carrinho
-    public void adicionarCarro(Carro carro) {
-        if (carro != null && !carrinho.contains(carro)) {
-            carrinho.add(carro);
-        }
-    }
 
-    public void removerCarro(Carro carro) {
-        carrinho.remove(carro);
-    }
-
-    public ArrayList<Carro> getCarrinho() {
-        return carrinho;
-    }
 
 
 }

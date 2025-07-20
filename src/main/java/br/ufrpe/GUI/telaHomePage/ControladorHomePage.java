@@ -42,10 +42,10 @@ public class ControladorHomePage {
     }
 
     private void carregarCarros() {
-        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
-        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asd", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
-        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asasdd", Categoria.ECONOMICO, true, 150.0, "Adicao de carro fiat uno");
-        fachada.cadastrarCarro("VW", "Pupunha", 2020, "d32d23d", Categoria.ECONOMICO, true, 300000.0, "Adicao de carro fiat uno");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", Categoria.ECONOMICO, true, 150.0, "carro fiat uno mt legal", "Carro adicionado com sucesso");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asd", Categoria.ECONOMICO, true, 150.0, "carro fiat uno mais ou menos", "Carro adicionado com sucesso");
+        fachada.cadastrarCarro("Fiat", "Uno", 2020, "asasdd", Categoria.ECONOMICO, true, 150.0, "carro fiat uno meio paia", "Carro adicionado com sucesso");
+        fachada.cadastrarCarro("VW", "Gol", 2020, "d32d23d", Categoria.ECONOMICO, true, 300000.0, "gol bolinha novo", "Carro adicionado com sucesso");
 
         Carro[] carros = fachada.listarCarros();
         for (Carro carro : carros) {
