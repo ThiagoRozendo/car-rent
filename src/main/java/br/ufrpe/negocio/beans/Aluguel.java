@@ -1,5 +1,6 @@
 package br.ufrpe.negocio.beans;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -23,10 +24,10 @@ public class Aluguel {
         this.cpfCliente = cpfCliente;
         this.ativo = true;
         this.atrasado = false;
-        if (carrinho.length == 2) {
+        if (carrinho.length <= 2 && carrinho.length > 0) {
             this.carrinho = carrinho;
         } else {
-            throw new IllegalArgumentException("O carrinho deve conter exatamente 2 carros.");
+            throw new IllegalArgumentException("O carrinho deve conter no máximo 2 carros e pelo menos 1 carro.");
         }
 
         this.valorParcial = getValorParcial();
@@ -54,14 +55,27 @@ public class Aluguel {
     }
 
     public double getValorParcial() {
-        double total = 0;
+        double precoPorDia = 0;
         for (Carro carro : carrinho) {
             if (carro != null) {
-                total += carro.getPreco();
+                precoPorDia += carro.getPreco();
             }
         }
+
+        long diasUsados = java.time.temporal.ChronoUnit.DAYS.between(dataInicio, LocalDate.now());
+        if (diasUsados < 1) diasUsados = 1; // mínimo de 1 dia para evitar total 0
+
+        double total = precoPorDia * diasUsados;
+
+        if (LocalDate.now().isAfter(dataFim)) {
+            long diasAtraso = java.time.temporal.ChronoUnit.DAYS.between(dataFim, LocalDate.now());
+            double taxa = 0.03 * diasAtraso;
+            total += total * taxa;
+        }
+
         return total;
     }
+
 
 
 
@@ -116,11 +130,6 @@ public class Aluguel {
     public void setAtrasado(boolean atrasado) {
         this.atrasado = atrasado;
     }
-
-    // carrinho
-
-
-
 }
 
 

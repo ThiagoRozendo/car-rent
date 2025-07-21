@@ -1,6 +1,11 @@
 package br.ufrpe.negocio.beans;
 
 public class Cliente {
+
+    @Override //to string pro choice dialog
+    public String toString() {
+        return this.nome;
+    }
     private String nome;
     private String cpf;
     private String endereco;

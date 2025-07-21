@@ -1,8 +1,12 @@
 package br.ufrpe.negocio.beans.Funionarios;
 
+import com.google.gson.annotations.Expose;
+
 public class Atendente extends Funcionario {
 
+    @Expose
     private double vendasBrutas;
+    @Expose
     private double taxaComissao;
 
     public Atendente(String nome, String email, String senha, double vendas, double taxa) {

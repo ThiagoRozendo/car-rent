@@ -2,9 +2,7 @@ package br.ufrpe.teste;
 
 import br.ufrpe.negocio.Fachada;
 import br.ufrpe.negocio.beans.*;
-import br.ufrpe.negocio.beans.Funionarios.Administrador;
 import br.ufrpe.negocio.beans.Funionarios.Funcionario;
-import br.ufrpe.negocio.exceptions.*;
 
 import java.time.LocalDate;
 
@@ -12,128 +10,118 @@ public class Main {
     public static void main(String[] args) {
         Fachada fachada = Fachada.getInstance();
 
-        // Cadastro de cliente
-        Cliente cliente = new Cliente("Joao Silva", "12345678901", "Rua A", "000000000", "joao@email.com", "1234567", null);
+        System.out.println("\nfuncionarios");
         try {
-            fachada.cadastrarCliente(cliente);
-            fachada.cadastrarCliente(cliente);
+            fachada.cadastrarAdministrador("Admin", "admin@admin.com", "senha", 5000.0);
+            System.out.println("Administrador cadastrado");
+            fachada.cadastrarAtendente("Joana", "joana@gmail.com", "senha", 20000.0, 0.05);
+            System.out.println("Atendente cadastrado");
         } catch (Exception e) {
-            System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
-        Cliente cliente2 = new Cliente("Maria Oliveira", "11111111111", "Rua B", "999999999", "maria@email.com", "7654321", null);
+
         try {
-            fachada.cadastrarCliente(cliente2);
-            System.out.println("Cliente cadastrado: " + cliente2.getNome());
+            Funcionario f = fachada.fazerLogin("admin@admin.com", "senha");
+            System.out.println("Login de '" + f.getNome() + "' realizado com sucesso.");
+            fachada.fazerLogout();
+            System.out.println("Logout realizado.");
         } catch (Exception e) {
-            System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
 
-        // Listar clientes
-        for (Cliente c : fachada.listarClientes()) {
-            System.out.println("Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Email: " + c.getEmail());
-        }
-
-        // Cadastro de carros
-        fachada.cadastrarCarro("Fiat", "Uno", 2020, "ABC1234", Categoria.ECONOMICO, true, 150.0, "fiat uno", "Adicao de carro fiat uno");
-        fachada.cadastrarCarro("VW", "Gol", 2019, "XYZ5678", Categoria.ECONOMICO, true, 180.0, "gol", "Adicao de carro vw gol");
-
-        // Listar carros
-        for (Carro c : fachada.listarCarros()) {
-            System.out.println("Placa: " + c.getPlaca() + ", Modelo: " + c.getModelo() + ", Preço: " + c.getPreco());
-        }
-
-        // aluguel
-
-        try{
-            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), fachada.listarCarros(), "12345678901");
-            System.out.println("Aluguel cadastrado com sucesso");
-        System.out.println(fachada.listarAlugueis().getLast().getValorParcial());
+        try {
+            fachada.fazerLogin("admin@gmail.com", "123");
         } catch (Exception e) {
-            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
+            System.out.println("Erro esperado de login: " + e.getMessage());
         }
 
-//        try {
-//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
-//            System.out.println("Aluguel cadastrado com sucesso");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
-//        }
-//
-//        try {
-//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "XYZ5678", "12345678901");
-//            System.out.println("Aluguel cadastrado com sucesso");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
-//        }
-//
-//        try {
-//            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(5), "ABC1234", "12345678901");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
-//        } // erro esperado
-//
-//        try {
-//            fachada.finalizarAluguel(0, cliente);
-//        } catch (Exception e) {
-//            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
-//        } // erro esperado
-//
-//        Administrador admin = new Administrador("Admin", "jonas@gmail.com", "admin123", 5000.0);
-//
-//         try {
-//            fachada.finalizarAluguel(0, admin);
-//             System.out.println("Aluguel finalizado com sucesso");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao finalizar aluguel: " + e.getMessage());
-//        }
-//
-//
-//        // Listar aluguéis
-//        System.out.println("Lista de alugueis:");
-//        for (Aluguel a : fachada.listarAlugueis()) {
-//            System.out.println("ID: " + a.getIdAluguel() + ", Cliente: " + a.getCpfCliente() + ", Placa: " + a.getPlacaCarro());
-//        }
-////
-//        try {
-//            fachada.excluirCarro("ABC1234", "quebrou mano");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao excluir carro: " + e.getMessage());
-//        }
-//         // Listar registros de carros
-//        System.out.println("Lista de registros:");
-//        for (RegistroCarros a : fachada.listarRegistros()) {
-//            System.out.println("Carro: " + a.getCarro().getMarca() + " " + a.getCarro().getModelo() + ", Descriçao: " + a.getDescricao() + ", Tipo de operaçao: " + a.getTipo() + ", Data e hora: " + a.getHorarioRegistro());
-//        }
 
-//        // Editar aluguel
-//        try {
-//            fachada.editarAluguel(0, LocalDate.now(), LocalDate.now().plusDays(10), "ABC1234", "12345678901");
-//            System.out.println("Aluguel editado com sucesso!");
-//        } catch (Exception e) {
-//            System.out.println("Erro ao editar aluguel: " + e.getMessage());
-//        }
+        System.out.println("\nclientes");
+        Cliente c1 = new Cliente("Carlos", "11122233344", "rua 1", "81999998888", "carlos@gmail.com", "1234567", null);
+        Cliente c2 = new Cliente("Souza", "55566677788", "rua 2", "81988887777", "souza@email.com", "7654321", null);
+        try {
+            fachada.cadastrarCliente(c1);
+            System.out.println("Cliente '" + c1.getNome() + "' cadastrado.");
+            fachada.cadastrarCliente(c2);
+            System.out.println("Cliente '" + c2.getNome() + "' cadastrado.");
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
-        // Buscar aluguel por ID
-//        try {
-//            Aluguel aluguel = fachada.buscarAluguelPorId(0);
-//            System.out.println("Aluguel encontrado: ID " + aluguel.getIdAluguel());
-//        } catch (AluguelNaoEncontradoException e) {
-//            System.out.println("Erro: " + e.getMessage());
-//        }
-//
-//        // Excluir aluguel
-//        try {
-//            fachada.excluirAluguel(0);
-//            System.out.println("Aluguel excluído com sucesso");
-//        } catch (AluguelNaoEncontradoException e) {
-//            System.out.println("Erro ao excluir aluguel: " + e.getMessage());
-//        }
+        try {
+            fachada.cadastrarCliente(c1);
+        } catch (Exception e) {
+            System.out.println("Erro esperado de cliente duplicado: " + e.getMessage());
+        }
 
-////        // Tentar buscar aluguel excluído
-//        try {
-//            fachada.buscarAluguelPorId(0);
-//        } catch (AluguelNaoEncontradoException e) {
-//            System.out.println("Erro esperado: " + e.getMessage());
-//        }
+
+        System.out.println("\ncarros");
+        fachada.cadastrarCarro("Fiat", "Mobi", 2023, "PDD1234", Categoria.ECONOMICO, true, 120.0, "Mobi novo", "Cadastro inicial");
+        fachada.cadastrarCarro("Jeep", "Compass", 2024, "QWE5678", Categoria.SUV, true, 350.50, "Compass novo", "Cadastro inicial");
+        fachada.cadastrarCarro("Hyundai", "HB20", 2022, "ASD9012", Categoria.INTERMEDIARIO, true, 180.0, "HB20 npvo", "Cadastro inicial");
+        System.out.println("carros cadastrados.");
+
+
+        System.out.println("\naluguel");
+        try {
+            Carro mobi = fachada.buscarCarroPorPlaca("PDD1234");
+            fachada.adicionarAoCarrinho(mobi);
+            System.out.println("Carro '" + mobi.getModelo() + "' adicionado ao carrinho.");
+            System.out.println("status do carro agora é: " + mobi.isStatus());
+
+            Carro[] carrosParaAlugar = fachada.getCarrinho().toArray(new Carro[0]);
+            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(7), carrosParaAlugar, c1.getCpf());
+            System.out.println("Aluguel para '" + c1.getNome() + "' cadastrado com sucesso.");
+            System.out.println("carrinho foi limpo apos o aluguel: " + fachada.getCarrinho().isEmpty());
+
+            System.out.println("status do carro '" + mobi.getModelo() + "' após aluguel é: " + mobi.isStatus());
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\nbloqueio por atraso");
+        try {
+            Carro compass = fachada.buscarCarroPorPlaca("QWE5678");
+            Carro[] carrosAtrasados = { compass };
+            fachada.cadastrarAluguel(LocalDate.now().minusDays(10), LocalDate.now().minusDays(2), carrosAtrasados, c2.getCpf());
+            System.out.println("aluguel atrasado criado para '" + c2.getNome() + "' para teste.");
+
+            boolean atrasado = fachada.clientePossuiAluguelAtrasado(c2.getCpf());
+            System.out.println("verificacao de atraso para '" + c2.getNome() + "': " + atrasado);
+
+            System.out.println("Tentando cadastrar novo aluguel para cliente com pendencia");
+            Carro hb20 = fachada.buscarCarroPorPlaca("ASD9012");
+            Carro[] novoCarrinho = { hb20 };
+            fachada.cadastrarAluguel(LocalDate.now(), LocalDate.now().plusDays(3), novoCarrinho, c2.getCpf());
+
+        } catch (Exception e) {
+            System.out.println("erro: " + e.getMessage());
+        }
+
+        System.out.println("\nfinalizacao de aluguel");
+        try {
+            System.out.println("Listando todos os alugueis:");
+            for(Aluguel a : fachada.listarAlugueis()){
+                System.out.println("  ID: " + a.getIdAluguel() + ", Cliente: " + a.getCpfCliente() + ", Ativo: " + a.isAtivo());
+            }
+
+            Funcionario admin = fachada.fazerLogin("admin@admin.com", "12345678");
+            fachada.finalizarAluguel(1, admin);
+            System.out.println("Aluguel id 1 (atrasado) foi finalizado.");
+
+            boolean aindaAtrasado = fachada.clientePossuiAluguelAtrasado(c2.getCpf());
+            System.out.println("Verificacao de atraso para '" + c2.getNome() + "' após quitação: " + aindaAtrasado);
+
+            Aluguel aluguelFinalizado = fachada.buscarAluguelPorId(1);
+            System.out.println("status do aluguel id 1 agora é ativo: " + aluguelFinalizado.isAtivo());
+            Carro compass = fachada.buscarCarroPorPlaca("QWE5678");
+            System.out.println("Status do carro Compass após devolucao é disponível: " + compass.isStatus());
+
+        } catch (Exception e){
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
+
     }
 }

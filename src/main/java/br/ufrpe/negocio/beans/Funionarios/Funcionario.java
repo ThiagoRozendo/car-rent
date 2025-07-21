@@ -1,7 +1,11 @@
 package br.ufrpe.negocio.beans.Funionarios;
 
+import com.google.gson.annotations.Expose;
+
 public abstract class Funcionario {
+    @Expose // expose pro gson ignorar a senha
     private String nome;
+    @Expose
     private String email;
     private String senha;
 
