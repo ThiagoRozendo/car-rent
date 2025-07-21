@@ -1,29 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F0F2F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.GUI.telaHomePage.ControladorHomePage">
    <top>
-      <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #333; -fx-background-image: url('/fundo.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+      <VBox spacing="15.0" style="-fx-background-color: #333; -fx-background-image: url('/fundo.jpg'); -fx-background-size: cover; -fx-background-position: center;">
          <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
          </padding>
          <children>
-            <Label text="Encontre o Carro Perfeito para Você" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtBusca" maxWidth="600.0" prefHeight="45.0" promptText="Digite a marca ou modelo do carro..." style="-fx-font-size: 14px; -fx-background-radius: 20;" />
-            <HBox fx:id="containerFiltros" alignment="CENTER" spacing="10.0" />
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <Label text="Encontre o Carro Perfeito" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Button fx:id="btnCadastrarAluguel" mnemonicParsing="false" onAction="#cadastrarAluguel" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 8;" text="Cadastrar Aluguel" visible="false">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnNotificacoes" contentDisplay="TOP" mnemonicParsing="false" onAction="#verNotificacoes" style="-fx-background-color: transparent;" text="Notificações" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="/notificacao.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnCliente" contentDisplay="TOP" mnemonicParsing="false" onAction="#irParaTelaCliente" style="-fx-background-color: transparent;" text="Cliente" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="/iconUser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnFuncionario" contentDisplay="TOP" mnemonicParsing="false" onAction="#irParaAreaFuncionario" style="-fx-background-color: transparent;" text="Funcionário" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="funcionario.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnHome" contentDisplay="TOP" mnemonicParsing="false" onAction="#irParaTelaHome" style="-fx-background-color: transparent;" text="Home" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="/homeIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxWidth="800.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="txtBusca" prefHeight="45.0" promptText="Buscar..." style="-fx-font-size: 14px; -fx-background-radius: 20;" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="comboBusca" prefHeight="45.0" prefWidth="150.0" style="-fx-font-size: 14px; -fx-background-radius: 20;" />
+               </children>
+            </HBox>
+            <HBox fx:id="containerFiltros" alignment="CENTER" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="checkMostrarAlugados" mnemonicParsing="false" text="Mostrar carros já alugados" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </top>
@@ -38,4 +107,49 @@
          </content>
       </ScrollPane>
    </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="80.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" right="40.0" />
+         </padding>
+         <children>
+            <Button fx:id="btnRelatorios" contentDisplay="LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrirMenuRelatorios" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Gerar Relatório" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/relatorio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnFazerBackup" contentDisplay="LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#fazerBackup" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Fazer Backup" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/backup.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnCadastrarCarro" contentDisplay="LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrirCadastroCarro" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Cadastrar Novo Carro" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

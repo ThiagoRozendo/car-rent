@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white; -fx-background-image: url('/fundo.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.GUI.telaInicial.TelaInicialController">
+   <children>
+      <VBox alignment="CENTER" layoutX="415.0" layoutY="145.0" maxHeight="Infinity" maxWidth="Infinity" prefWidth="450.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 5);" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="145.0">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/carRent.png" />
+               </image>
+            </ImageView>
+            <Label text="Bem-vindo ao Car Rent" textFill="#2c3e50">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Sistema de aluguel de carros" textFill="#7f8c8d">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+            </Separator>
+            <Button contentDisplay="LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrirCadastroCliente" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8;" text="Cadastrar Cliente">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/iconUser.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button contentDisplay="LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrirCadastroFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 8;" text="Área do Funcionário">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/funcionario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <HBox fx:id="loginBox" alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Já possui uma conta?" textFill="#555555">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#abrirLogin" style="-fx-background-color: transparent; -fx-text-fill: #3498db; -fx-border-color: transparent; -fx-underline: true;" text="Faça Login">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+
+            <Button fx:id="btnLogout" contentDisplay="LEFT" graphicTextGap="10.0" managed="false" mnemonicParsing="false" onAction="#fazerLogout" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 8;" text="Deslogar" visible="false">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/logout2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

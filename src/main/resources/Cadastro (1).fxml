@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
@@ -19,87 +20,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #F0F2F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.GUI.telaCadastro.ControladorCadastro">
    <children>
-      <VBox alignment="CENTER" prefHeight="540.0" prefWidth="450.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-background-image: url('/fundo.jpg');">
-      <effect>
-            <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
-               <color>
-                  <Color opacity="0.1" />
-               </color>
-            </DropShadow>
-         </effect>
-         <padding>
-            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
-         </padding>
-         <children>
-            <Label text="Cadastro de Funcionário">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <GridPane hgap="10.0" prefWidth="370.0" vgap="15.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label text="Nome:" />
-                  <Label text="E-mail:" GridPane.rowIndex="1" />
-                  <Label text="Senha:" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtNome1" promptText="Nome completo do funcionário" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtEmail1" promptText="email@empresa.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="txtSenha1" promptText="Crie uma senha de acesso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label layoutX="10.0" layoutY="99.0" text="Vendas" GridPane.rowIndex="3" />
-                  <PasswordField fx:id="txtSalario1" layoutX="140.0" layoutY="95.0" promptText="Valor de vendas do funcionário" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label layoutX="10.0" layoutY="17.0" text="Taxa de Comissão:" GridPane.rowIndex="4" />
-                  <PasswordField fx:id="txtSalario11" layoutX="140.0" layoutY="148.0" promptText="Taxa de comissão do funcionário" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-               </children>
-            </GridPane>
-            <VBox alignment="CENTER" spacing="10.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <children>
-                  <Label text="Cargo do Funcionário">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <RadioButton fx:id="rbAdmin2" mnemonicParsing="false" onAction="#radioAdminSelecionado" selected="true" text="Administrador">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="cargoFuncionarioGroup2" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="rbAtendente2" mnemonicParsing="false" onAction="#RadioAtendenteSelecionado" text="Atendente">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="cargoFuncionarioGroup3" />
-                           </toggleGroup>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <Button fx:id="botaoCadastrarFuncionario1" defaultButton="true" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #0078D4; -fx-text-fill: white; -fx-font-weight: bold;" text="Cadastrar Funcionário">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Label fx:id="aviso1" prefHeight="17.0" prefWidth="336.0" text="Mensagem de erro aqui" textFill="RED" visible="false">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox fx:id="vboxAdmin" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="140.0">
+      <VBox alignment="TOP_CENTER" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="80.0">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
                <color>
@@ -108,68 +29,97 @@
             </DropShadow>
          </effect>
          <padding>
-            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
          </padding>
          <children>
             <Label text="Cadastro de Funcionário">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <GridPane hgap="10.0" prefWidth="370.0" vgap="15.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <Separator prefWidth="200.0" />
+            <Label text="Selecione o tipo de funcionário:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Label text="Nome:" />
-                  <Label text="E-mail:" GridPane.rowIndex="1" />
-                  <Label text="Senha:" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtNome" promptText="Nome completo do funcionário" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtEmail" promptText="email@empresa.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <PasswordField fx:id="txtSenha" promptText="Crie uma senha de acesso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label layoutX="10.0" layoutY="99.0" text="Salário Mensal:" GridPane.rowIndex="3" />
-                  <PasswordField fx:id="txtSalario" layoutX="140.0" layoutY="95.0" promptText="Salário mensal do funcionário" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <RadioButton fx:id="rbAdmin" mnemonicParsing="false" onAction="#radioAdminSelecionado" selected="true" text="Administrador">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="cargoFuncionarioGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbAtendente" mnemonicParsing="false" onAction="#RadioAtendenteSelecionado" text="Atendente" toggleGroup="$cargoFuncionarioGroup" />
                </children>
-            </GridPane>
-            <VBox alignment="CENTER" spacing="10.0">
+            </HBox>
+            <VBox fx:id="vboxAdmin" spacing="15.0">
                <children>
-                  <Label text="Cargo do Funcionário">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" spacing="20.0">
+                  <GridPane hgap="10.0" vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <RadioButton fx:id="rbAdmin" mnemonicParsing="false" onAction="#radioAdminSelecionado" selected="true" text="Administrador">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="cargoFuncionarioGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="rbAtendente" mnemonicParsing="false" onAction="#RadioAtendenteSelecionado" text="Atendente" toggleGroup="$cargoFuncionarioGroup" />
+                        <Label text="Nome:" />
+                        <Label text="E-mail:" GridPane.rowIndex="1" />
+                        <Label text="Senha:" GridPane.rowIndex="2" />
+                        <Label text="Salário (R$):" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtNome" promptText="Nome completo do administrador" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtEmail" promptText="email@dominio.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="txtSenha" promptText="Mínimo de 8 caracteres" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtSalario" promptText="Ex: 5000.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
-                  </HBox>
+                  </GridPane>
+                  <Label fx:id="aviso" alignment="CENTER" prefWidth="Infinity" text="Mensagem de erro" textFill="RED" visible="false" />
+                  <Button fx:id="botaoCadastrarFuncionario" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="40.0" prefWidth="Infinity" style="-fx-background-color: #0078D4; -fx-text-fill: white;" text="Cadastrar Administrador">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
                </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
             </VBox>
-            <Button fx:id="botaoCadastrarFuncionario" defaultButton="true" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #0078D4; -fx-text-fill: white; -fx-font-weight: bold;" text="Cadastrar Funcionário">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Label fx:id="aviso" prefHeight="17.0" prefWidth="300.0" text="Mensagem de erro aqui" textFill="RED" visible="false">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
+            <VBox fx:id="vboxAtendente" spacing="15.0" visible="false">
+               <children>
+                  <GridPane hgap="10.0" vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Nome:" />
+                        <Label text="E-mail:" GridPane.rowIndex="1" />
+                        <Label text="Senha:" GridPane.rowIndex="2" />
+                        <Label text="Vendas Brutas (R$):" GridPane.rowIndex="3" />
+                        <Label text="Taxa de Comissão:" GridPane.rowIndex="4" />
+                        <TextField fx:id="txtNome1" promptText="Nome completo do atendente" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtEmail1" promptText="email@dominio.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="txtSenha1" promptText="Mínimo de 8 caracteres" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtSalario1" promptText="Ex: 25000.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtSalario11" promptText="Ex: 0.05 (para 5%)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+                  <Label fx:id="aviso1" alignment="CENTER" prefWidth="Infinity" text="Mensagem de erro" textFill="RED" visible="false" />
+                  <Button fx:id="botaoCadastrarFuncionario1" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="40.0" prefWidth="Infinity" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Cadastrar Atendente">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

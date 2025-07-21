@@ -21,6 +21,18 @@ public class ControladorDetalhesCarro {
     private Button btnAdcionarCarrinho;
 
     @FXML
+    private Button btnRemoverCarrinho;
+
+    @FXML
+    private Button btnCadastrarAluguel;
+
+    @FXML
+    private Button btnCliente;
+
+    @FXML
+    private Button btnHome;
+
+    @FXML
     private ImageView imgCarro;
 
     @FXML
@@ -33,43 +45,42 @@ public class ControladorDetalhesCarro {
     private Label lblPreco;
 
     @FXML
-    private Button btnRemoverCarrinho;
-
-    @FXML
     private TextArea txtDescricao;
+
     private Fachada fachada = Fachada.getInstance();
     private Carro carroSelecionado;
-
-    boolean adicionado = false;
 
     @FXML
     public void initialize() {
         btnAdcionarCarrinho.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
-                newScene.setOnKeyPressed(event -> {
-                    switch (event.getCode()) {
-                        case ESCAPE:
-                            try {
-                                voltarTelaAnterior();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
+                newScene.windowProperty().addListener((obs2, oldWindow, newWindow) -> {
+                    if (newWindow != null) {
+                        newScene.setOnKeyPressed(event -> {
+                            switch (event.getCode()) {
+                                case ESCAPE:
+                                    try {
+                                        irParaTelaHomePage();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
-                            break;
-                        default:
-                            break;
+                        });
                     }
                 });
             }
         });
+        atualizarVisibilidadeBotoes();
     }
-
 
     @FXML
     void adicionarAoCarrinho(ActionEvent event) {
         try {
             fachada.adicionarAoCarrinho(carroSelecionado);
-            btnRemoverCarrinho.setVisible(true);
-            System.out.println("Carro adicionado ao carrinho: " + carroSelecionado.getModelo());
+            atualizarVisibilidadeBotoes();
         } catch (IllegalStateException e) {
             System.out.println("Carrinho cheio! Não é possível adicionar mais carros.");
         }
@@ -77,13 +88,12 @@ public class ControladorDetalhesCarro {
 
     @FXML
     void removerDoCarrinho(ActionEvent event) {
-        try{
+        try {
             fachada.removerDoCarrinho(carroSelecionado);
             System.out.println("Carro removido do carrinho: " + carroSelecionado.getModelo());
+            atualizarVisibilidadeBotoes();
         } catch (IllegalStateException e) {
             System.out.println("Erro ao remover carro do carrinho: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Erro inesperado: " + e.getMessage());
         }
     }
 
@@ -97,29 +107,43 @@ public class ControladorDetalhesCarro {
         lblCategoria.setText(carroSelecionado.getCategoria().toString());
         lblPreco.setText("R$ " + carroSelecionado.getPreco());
         txtDescricao.setText(carroSelecionado.getDescricao());
-
-        if(fachada.getCarrinho().contains(carroSelecionado)) {
-            btnRemoverCarrinho.setVisible(true);
-        }
-
+        atualizarVisibilidadeBotoes();
     }
 
-    private void voltarTelaAnterior() throws IOException {
+    private void atualizarVisibilidadeBotoes() {
+        boolean carroEstaNoCarrinho = fachada.getCarrinho().contains(carroSelecionado);
+        boolean carrinhoNaoVazio = !fachada.getCarrinho().isEmpty();
 
-        btnAdcionarCarrinho.getScene().getWindow().hide();
-
-        try {
-            Stage stage = (Stage) txtDescricao.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TelaHomePage2.fxml"));
-            Parent root = loader.load();
-            Scene novaCena = new Scene(root);
-            stage.setScene(novaCena);
-            stage.show();
-
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar tela: " + e.getMessage());
-        }
+        btnRemoverCarrinho.setVisible(carroEstaNoCarrinho);
+        btnAdcionarCarrinho.setVisible(!carroEstaNoCarrinho);
+        btnCadastrarAluguel.setVisible(carrinhoNaoVazio);
     }
 
+    @FXML
+    void cadastrarAluguel(ActionEvent event) throws IOException {
+        navegarPara("/TelaCadastroAlugueis.fxml");
+    }
 
+    @FXML
+    void irParaTelaCliente(ActionEvent event) throws IOException {
+        navegarPara("/TelaClientes.fxml");
+    }
+
+    @FXML
+    void irParaTelaHome() throws IOException {
+        navegarPara("/TelaInicial.fxml");
+    }
+    @FXML
+    void irParaTelaHomePage() throws IOException {
+        navegarPara("/TelaHomePage2.fxml");
+    }
+
+    private void navegarPara(String fxmlPath) throws IOException {
+        Stage stage = (Stage) txtDescricao.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Scene novaCena = new Scene(root);
+        stage.setScene(novaCena);
+        stage.show();
+    }
 }
