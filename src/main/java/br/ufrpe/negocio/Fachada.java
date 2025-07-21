@@ -5,10 +5,13 @@ import br.ufrpe.negocio.beans.Funionarios.*;
 import br.ufrpe.negocio.controllers.*;
 import br.ufrpe.negocio.excecoes.ClienteNaoEncontradoException;
 import br.ufrpe.negocio.exceptions.*;
+import br.ufrpe.negocio.beans.Notificacao;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Fachada {
 
@@ -18,7 +21,10 @@ public class Fachada {
     private final ControladorAtendente controladorAtendente;
     private final ControladorCarros controladorCarros;
     private final ControladorCliente controladorCliente;
+    private Funcionario usuarioLogado = null;
     private List<Carro> carrinho = new ArrayList<>();
+    private final List<Notificacao> notificacoes = new ArrayList<>();
+    private final List<String> reservas = new ArrayList<>();
 
 
 
@@ -36,6 +42,10 @@ public class Fachada {
             instance = new Fachada();
         }
         return instance;
+    }
+
+    public Funcionario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
     // Administrador
@@ -86,7 +96,7 @@ public class Fachada {
 
     // Cliente
     public void cadastrarCliente(Cliente cliente)
-            throws ClienteJaCadastradoException, IllegalArgumentException {
+            throws ClienteJaCadastradoException, IllegalArgumentException, ClienteNaoEncontradoException {
         controladorCliente.cadastrarCliente(cliente);
     }
 
@@ -98,14 +108,34 @@ public class Fachada {
         controladorCliente.removerCliente(cpf);
     }
 
+    public void editarCliente(Cliente cliente, String nome, String endereco, String telefone, String email, String cnh) {
+        controladorCliente.editarCliente(cliente, nome, endereco, telefone, email, cnh);
+    }
+
     public Cliente[] listarClientes() {
         return controladorCliente.listarClientes();
+    }
+
+
+    public boolean clientePossuiAluguelAtrasado(String cpfCliente) {
+        ArrayList<Aluguel> todosAlugueis = this.listarAlugueis();
+        LocalDate hoje = LocalDate.now();
+
+        for (Aluguel aluguel : todosAlugueis) {
+            if (aluguel.getCpfCliente().equals(cpfCliente) &&
+                    aluguel.isAtivo() &&
+                    aluguel.getDataFim().isBefore(hoje)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Aluguel
     public void cadastrarAluguel(LocalDate inicio, LocalDate fim, Carro[] carrinho, String cpf)
             throws DataInvalidaException, CarroInvalidoException, CpfNaoEncontradoException {
         controladorAlugueis.cadastrar(inicio, fim, carrinho, cpf);
+        limparCarrinho();
     }
 
     public void editarAluguel(int id, LocalDate inicio, LocalDate fim, Carro[] carrinho, String cpf)
@@ -127,6 +157,22 @@ public class Fachada {
 
     public void finalizarAluguel(int idAluguel, Object funcionario) throws AluguelNaoEncontradoException, IllegalArgumentException {
         controladorAlugueis.finalizarAluguel(idAluguel, funcionario);
+
+        // notificaccao
+        Aluguel aluguel = this.buscarAluguelPorId(idAluguel);
+        if (aluguel != null) {
+            for (Carro carro : aluguel.getCarrinho()) {
+                List<String> reservasParaEsteCarro = reservas.stream()
+                        .filter(r -> r.startsWith(carro.getPlaca() + ";"))
+                        .collect(Collectors.toList());
+
+                for (String reserva : reservasParaEsteCarro) {
+                    String mensagem = "O carro " + carro.getModelo() + " (" + carro.getPlaca() + ") que você reservou está disponível!";
+                    notificacoes.add(new Notificacao(mensagem));
+                }
+                reservas.removeAll(reservasParaEsteCarro);
+            }
+        }
     }
 
     // Carro
@@ -158,21 +204,29 @@ public class Fachada {
     public Funcionario fazerLogin(String email, String senha) throws AdministradorNaoEncontradoException, DadosInvalidosException {
         if(email.equals("admin@admin.com") && senha.equals("12345678")){
             controladorAdministrador.cadastrar("Administrador", "admin@admin.com", "12345678", 3450.00);
-            return controladorAdministrador.buscarPorEmail("admin@admin.com");
+            this.usuarioLogado = controladorAdministrador.buscarPorEmail("admin@admin.com");
+            return usuarioLogado;
         }
 
         for (Funcionario administrador : controladorAdministrador.listar()) {
             if (administrador.getEmail().equals(email) && administrador.getSenha().equals(senha)) {
+                this.usuarioLogado = administrador;
                 return administrador;
             }
         }
 
         for (Funcionario atendente : controladorAtendente.listar()) {
             if (atendente.getEmail().equals(email) && atendente.getSenha().equals(senha)) {
+                this.usuarioLogado = atendente;
                 return atendente;
             }
         }
         throw new AdministradorNaoEncontradoException("Login inválido. Verifique seu email e senha.");
+    }
+
+    // Logout
+    public void fazerLogout() {
+        this.usuarioLogado = null;
     }
 
     public void adicionarAoCarrinho(Carro carro) {
@@ -196,5 +250,22 @@ public class Fachada {
 
     public void limparCarrinho() {
         carrinho.clear();
+    }
+
+    public void solicitarReserva(Carro carro, Cliente cliente) {
+        if (carro != null && cliente != null) {
+            String reserva = carro.getPlaca() + ";" + cliente.getCpf();
+            if (!reservas.contains(reserva)) {
+                reservas.add(reserva);
+            }
+        }
+    }
+
+    public List<Notificacao> getNotificacoesNaoLidas() {
+        List<Notificacao> naoLidas = notificacoes.stream()
+                .filter(n -> !n.isLida())
+                .collect(Collectors.toList());
+        naoLidas.forEach(Notificacao::marcarComoLida);
+        return naoLidas;
     }
 }
