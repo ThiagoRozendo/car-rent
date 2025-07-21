@@ -24,7 +24,7 @@ public class ControladorCliente {
     }
 
     public void cadastrarCliente(Cliente cliente)
-            throws ClienteJaCadastradoException, IllegalArgumentException {
+            throws ClienteJaCadastradoException, IllegalArgumentException, ClienteNaoEncontradoException {
 
         if (cliente == null) {
             throw new IllegalArgumentException("O objeto cliente não pode ser nulo.");
@@ -33,10 +33,40 @@ public class ControladorCliente {
             throw new IllegalArgumentException("O CPF do cliente é obrigatório.");
         }
 
+        if (cliente.getNome() == null || cliente.getNome().isBlank()) {
+            throw new IllegalArgumentException("O nome do cliente é obrigatório.");
+        }
+
+        if (cliente.getEmail() == null || cliente.getEmail().isBlank()) {
+            throw new IllegalArgumentException("O email do cliente é obrigatório.");
+        }
+
+        if (cliente.getTelefone() == null || cliente.getTelefone().isBlank()) {
+            throw new IllegalArgumentException("O telefone do cliente é obrigatório.");
+        }
+
+        if (cliente.getEndereco() == null || cliente.getEndereco().isBlank()) {
+            throw new IllegalArgumentException("O endereço do cliente é obrigatório.");
+        }
+
+        if (cliente.getCnh() == null || cliente.getCnh().isBlank()) {
+            throw new IllegalArgumentException("A CNH do cliente é obrigatória.");
+        }
+
         this.repositorioCliente.adicionarCliente(cliente);
     }
 
 
+    public void editarCliente(Cliente cliente, String nome, String endereco, String telefone, String email, String cnh) {
+        if (cliente != null) {
+            cliente.setNome(nome);
+            cliente.setEndereco(endereco);
+            cliente.setTelefone(telefone);
+            cliente.setEmail(email);
+            cliente.setCnh(cnh);
+            this.repositorioCliente.alterar(cliente);
+        }
+    }
 
     public Cliente buscar(String cpf) throws ClienteNaoEncontradoException {
         return this.repositorioCliente.buscar(cpf);

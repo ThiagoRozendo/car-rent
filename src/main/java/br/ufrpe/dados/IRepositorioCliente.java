@@ -12,6 +12,7 @@ public interface IRepositorioCliente {
 
     Cliente buscar(String cpf) throws ClienteNaoEncontradoException; // Renomeado
 
+    void alterar(Cliente cliente);
     void removerPorCpf(String cpf) throws ClienteNaoEncontradoException;
 
     Cliente[] listar();

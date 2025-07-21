@@ -48,6 +48,10 @@ public class RepositorioCliente implements IRepositorioCliente {
             return;
         }
 
+        if (!cliente.getCpf().matches("\\d{11}")) {
+            throw new IllegalArgumentException("CPF inválido. Deve conter exatamente 11 números.");
+        }
+
         if (this.existe(cliente.getCpf())) {
             throw new ClienteJaCadastradoException("Cliente já cadastrado.");
         }
@@ -65,6 +69,20 @@ public class RepositorioCliente implements IRepositorioCliente {
             }
         }
         throw new ClienteNaoEncontradoException("Cliente com CPF " + cpf + " não encontrado.");
+    }
+
+    @Override
+    public void alterar(Cliente cliente) {
+        int indice = -1;
+        for (int i = 0; i < this.proximaPosicao; i++) {
+            if (this.clientes[i] != null && this.clientes[i].getCpf().equals(cliente.getCpf())) {
+                indice = i;
+                break;
+            }
+        }
+        if (indice != -1) {
+            this.clientes[indice] = cliente;
+        }
     }
 
     @Override

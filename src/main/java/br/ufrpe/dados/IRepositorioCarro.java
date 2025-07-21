@@ -1,4 +1,3 @@
-// src/main/java/br/ufrpe/dados/IRepositorioCarro.java
 package br.ufrpe.dados;
 
 import br.ufrpe.negocio.beans.Carro;
