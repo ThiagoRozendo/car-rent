@@ -96,14 +96,19 @@ public class RepositorioAluguel implements IRepositorioAluguel {
     @Override
     public void finalizarAluguel(int idAluguel, Object funcionario) {
         if (funcionario instanceof Funcionario) {
+
             Aluguel aluguel = buscarPorId(idAluguel);
             if (aluguel == null) {
                 throw new AluguelNaoEncontradoException("Aluguel não encontrado.");
             }
             aluguel.setAtivo(false);
-            Carro carro = controladorCarros.buscarCarroPorPlaca(aluguel.getPlacaCarro());
-            if (carro != null) {
-                carro.setStatus(true); // Marca o carro como disponível novamente
+
+            Carro[] carro = aluguel.getCarrinho();
+
+            for (int i = 0; i < carro.length; i++) {
+                if (carro[i] != null) {
+                    carro[i].setStatus(true);
+                }
             }
         } else {
             throw new IllegalArgumentException("Apenas funcionários podem finalizar o aluguel.");
