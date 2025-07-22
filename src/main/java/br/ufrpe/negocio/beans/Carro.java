@@ -1,4 +1,3 @@
-// src/main/java/br/ufrpe/negocio/beans/Carro.java
 package br.ufrpe.negocio.beans;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class Carro {
     private String descricao;
 
 
-    // Construtor corrigido para receber o enum Categoria
+
     public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         this.marca = marca;
         this.modelo = modelo;
@@ -28,17 +27,14 @@ public class Carro {
         this.descricao = descricao;
     }
 
-    // Método toString() para formatação automática no relatório
+
     @Override
     public String toString() {
-        // Usando Locale.forLanguageTag("pt-BR") para formatar o preço como moeda brasileira
+
         return String.format(Locale.forLanguageTag("pt-BR"),
                 "  - %s %s (%d) | Placa: %s | Preço: R$ %.2f",
                 this.marca, this.modelo, this.anoFabricacao, this.placa, this.preco);
     }
-
-    // --- Getters e Setters ---
-    // (Apenas o get/set de Categoria precisa de atenção)
 
     public String getMarca() {
         return marca;
