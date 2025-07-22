@@ -14,8 +14,6 @@ public class Carro {
     private List<Historico> historicos;
     private String descricao;
 
-
-
     public Carro(String marca, String modelo, int anoFabricacao, String placa, Categoria categoria, boolean status, double preco, String descricao) {
         this.marca = marca;
         this.modelo = modelo;
@@ -26,7 +24,6 @@ public class Carro {
         this.preco = preco;
         this.descricao = descricao;
     }
-
 
     @Override
     public String toString() {
